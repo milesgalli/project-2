@@ -3,6 +3,8 @@ $(document).ready(function() {
   var signUpForm = $("form.signup");
   var emailInput = $("input#email-input");
   var passwordInput = $("input#password-input");
+  var studentInput = $("#studentInput");
+  var companyInput = $("#companyInput");
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
@@ -40,3 +42,30 @@ $(document).ready(function() {
     $("#alert").fadeIn(500);
   }
 });
+
+function studentQuestions () {
+  //if check box is clicked
+  //append these questions in next step
+  let studentInput = $("#studentInput").prop( "checked", true )
+  const questions = $(".questionsAppend") 
+
+  if (studentInput) {
+    let test = $("<p>").text("test")
+
+    questions.append(test)
+  }
+
+}
+
+studentQuestions();
+
+function companyQuestions() {
+  //if checkbox for company is clicked
+  //append these questions in next step
+  var companyInput = $("#companyInput").prop( "checked", true )
+
+  if (companyInput) {
+
+  }
+
+}
