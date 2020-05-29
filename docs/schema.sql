@@ -10,7 +10,7 @@ CREATE TABLE `users` (
   `location` varchar(255),
   `created_at` timestamp,
   `updated_at` timestamp,
-  `company_id` integer
+
 );
 
 CREATE TABLE `companies` (
@@ -41,7 +41,7 @@ CREATE TABLE `hackathon_user` (
   PRIMARY KEY (`user_id`, `hackathon_id`)
 );
 
-ALTER TABLE `users` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`);
+-- ALTER TABLE `users` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`);
 
 ALTER TABLE `hackathons` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`);
 

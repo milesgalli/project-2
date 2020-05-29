@@ -1,19 +1,19 @@
-module.exports = function (sequelize, Sequelize) {
-  // Sequelize user model is initialized earlier as User
+module.exports = function (sequelize,DataTypes) {
+  // DataTypes user model is initialized earlier as User
   const Hackathon = sequelize.define("Hackathon", {
-    id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    title: { type: Sequelize.STRING },
-    description: { type: Sequelize.STRING },
-    maxStudent: { type: Sequelize.INTEGER },
-    startDate: { type: Sequelize.DATE },
-    endDate: { type: Sequelize.DATE },
-    createdAt: { type: Sequelize.DATE },
-    updatedAt: { type: Sequelize.DATE },
+    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    title: { type: DataTypes.STRING },
+    description: { type: DataTypes.STRING },
+    maxStudent: { type: DataTypes.INTEGER },
+    startDate: { type: DataTypes.DATE },
+    endDate: { type: DataTypes.DATE },
+    createdAt: { type: DataTypes.DATE },
+    updatedAt: { type: DataTypes.DATE },
   });
 
   Hackathon.associate = function (models) {
     Hackathon.belongsTo(models.Company, {
-      foreignKey: "companyId",
+      foreignKey: "companyIdentification",
     });
     Hackathon.belongsToMany(models.User, { through: "HackathonUser" });
 

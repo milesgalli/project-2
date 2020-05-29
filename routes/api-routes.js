@@ -1,19 +1,21 @@
 // Requiring our models and passport as we've configured it
-var db = require("../models");
-var passport = require("../config/passport");
+const db = require("../models");
+const passport = require("../config/passport");
+
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
 
-  // could have api/student signup 
+  // could have api/student signup
 
+  // LEAVE
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
-      id: req.user.id
+      id: req.user.id,
     });
   });
 
@@ -21,11 +23,12 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
 
-  
+  // LEAVE
+
   app.post("/api/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     })
       .then(function() {
         res.redirect(307, "/api/login");
@@ -51,8 +54,77 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
       });
     }
   });
+
+  // Get Route for finding all Hackathons
+
+  app.get("api/hackathons/", function(req, res) {
+    db.Hackathon.findAll({}).then(function(dbHackathon) {
+      res.json(dbHackathon);
+    });
+  });
+
+  // Get Route for retreieving a hackathon post from a specific company
+
+  app.get("api/company/:companyName", function(req, res) {
+    db.Hackathon.findAll({
+      where: {
+        companyName: req.params.companyName,
+      },
+    }).then(function(dbCompany) {
+      res.json(dbCompany);
+    });
+  });
+
+  // Post Route for Creating a new Post
+
+  app.post("api/hackathons", function(req, res) {
+    db.Hackathon.create({
+
+      title: req.body.title,
+      description: req.boby.description,
+      maxStudent: req.body.description,
+      startDate: req.body.description,
+      endDate: req.body.endDate,
+      
+    }).then(function(dbHackathon) {
+      res.json(dbHackathon);
+    });
+  });
+
+  // Route for deleting hackathons post 
+  app.delete("/api/hackathons/:id", function(req, res) {
+    db.Hackathon.destroy({
+      where: {
+        id: req.params.id,
+      },
+    }).then(function(dbHackathon) {
+      res.json(dbHackathon);
+    });
+  });
+
+  // route for updating hackathon posts
+  app
+    .put("api/hackathons", function(req, res) {
+      db.Hackathon.update(req.body, {
+        where: {
+          title: req.body.title,
+          description: req.body.description,
+          maxStudent: req.body.maxStudent,
+          startDate: req.body.startDate,
+          endDate: req.body.endDate,
+        },
+      });
+    })
+    .then(function(dbHackathon) {
+      res.json(dbHackathon);
+    });
+
+// need to create a get method for  when a user clicks going to a hackathon 
+
+
+  //last parenthesis for app
 };
