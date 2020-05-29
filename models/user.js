@@ -18,21 +18,21 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
 
-    id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    fullname: { type: Sequelize.STRING },
-    role: { type: Sequelize.STRING },
-    location: { type: Sequelize.STRING },
-    technologies: { type: Sequelize.JSON },
-    course_graduated: { type: Sequelize.STRING },
-    employment: { type: Sequelize.BOOLEAN },
-    createdAt: { type: Sequelize.DATE },
-    updatedAt: { type: Sequelize.DATE },
-    companyId: { type: Sequelize.INTEGER },
+    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    fullname:{ type: DataTypes.STRING },
+    role:{ type: DataTypes.STRING },
+    location: { type: DataTypes.STRING },
+    technologies: { type: DataTypes.JSON },
+    course_graduated: { type: DataTypes.STRING },
+    employment: { type: DataTypes.BOOLEAN },
+    createdAt: { type: DataTypes.DATE },
+    updatedt: { type: DataTypes.DATE },
+    companyIdentification: { type: DataTypes.INTEGER },
   });
 
   User.associate = function (models) {
-    User.belongsTo(models.companies, {
-      foreignKey: "companyId",
+    User.belongsTo(models.Company, {
+      foreignKey: "companyIdentification",
     });
     User.belongsToMany(models.Hackathon, { through: "HackathonUser" });
   };
