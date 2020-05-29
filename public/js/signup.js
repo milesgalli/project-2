@@ -69,25 +69,21 @@ $(document).ready(function() {
 questions();
 
 let states = {
-  step: 1,
   inputData: {
     email: "1",
     password: "null",
     user_type: "null"
   },  // studetn / company
-  step: 2,
   inputData: {
     email: "2",
     password: "null",
     user_type: "null"
   },
-  step: 3,
   inputData: {
     email: "3",
     password: "null",
     user_type: "null"
   },
-  step: 4,
   inputData: {
     email: "4",
     password: "null",
@@ -109,21 +105,21 @@ let states = {
       counter++;
       console.log(counter)
       //console.log(states.inputData[counter])
-      console.log(states.steps.val(counter))
+      console.log(states.inputData.email[counter])
     }
   })
 
   $("#previous").click(function add() {
 
-    if (counter >= 0) {
+    if (counter >= -1) {
       counter--;
       console.log(counter)
       //console.log(states.inputData[counter])
-      console.log(states.steps.val(counter))
+      console.log(states.inputData.email[counter])
     }
   })
 
-  console.log(states[counter])
+  //console.log(states[counter])
 
 });
 
