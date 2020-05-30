@@ -46,28 +46,6 @@ $(document).ready(function() {
   }
 
 
-  //student or company questions appeneded
-//   function questions() {
-
-//     const questions = $(".questionsAppend");
-
-//     if ($("#studentInput").prop("checked")) {
-
-//       let test = $("<p>").text("student");
-  
-//       questions.append(test); 
-
-//     } if (companyInput.prop("checked")) {
-
-//       let test = $("<p>").text("company");
-
-//       questions.append(test);
-//     }
-
-//   }
-
-// questions();
-
 const questions = $(".questionsAppend");
 
 let states = {
@@ -91,10 +69,16 @@ let states = {
       console.log(states.counter)
     }
 
-    if(states.counter ===2 ){
+    if(states.counter === 2 ){
       // we are currently in social page
       renderUserTypeOnSignup()
     }
+
+    if (states.counter === 3 ) {
+      //hide next btn on last step, create submit
+      $("#next").attr('style', 'display:none;');
+      $("#submitAppend").append(`<a type="submit" class="button is-light">Sign Up</a>`)
+    } 
 
   })
 
@@ -104,6 +88,10 @@ let states = {
       states.counter--;
       console.log(states.counter)
     }
+
+    $("#next").removeAttr('style');
+    $("#submitAppend").css("display", "none")
+
   })
 
   //if states.counter === this number, or/and student is checked append this
@@ -165,6 +153,8 @@ function renderUserTypeOnSignup() {
   } 
 
 }
+
+//getting data from user input
 
 });
 
