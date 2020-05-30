@@ -110,23 +110,59 @@ let states = {
 
 function renderUserTypeOnSignup() {
 
-  let isCompany = $("#companyInput").prop("checked")
+  questions.empty()
+
   let isStudent = $("#studentInput").prop("checked")
+  let isCompany = $("#companyInput").prop("checked")
 
   let userType;
 
+  if (isStudent) {
+    userType = "student"
+
+    let studentQuestionText = `
+        <label for="exampleInputCourse">What course did you gaduate from?</label>
+        <div class="control">
+          <input type="text" class="input" id="course-input">
+        </div>
+      </div>
+      <div class="field">
+        <label for="exampleInputTechnologies">What technology feilds are you experienced in?</label>
+        <div class="control">
+          <input type="text" class="input" id="technology-input">
+        </div>
+      </div>
+      <div class="field">
+      <div class="control">
+        <label class="radio" for="exampleInputEmployment">Are you looking for employment?
+          <input type="checkbox" name="answer">Yes
+        </label>
+        <label class="radio">
+          <input type="checkbox" name="answer">No
+        </label>
+      </div>
+    </div>
+    `;
+    questions.append(studentQuestionText);
+  }
   if (isCompany) {
     userType = 'company'
 
-
+    let companyQuestionText = `
+      <label for="exampleInputIndustry">What industry is your company in?</label>
+      <div class="control">
+        <input type="text" class="input" id="industry-input">
+      </div>
+    </div>
+    <div class="field">
+      <label for="exampleInputMaxEmployees">How many employees do you have?</label>
+      <div class="control">
+        <input type="text" class="input" id="MaxEmployees-input">
+      </div>
+    </div>
+    `;
+    questions.append(companyQuestionText);
   } 
-  if (isStudent) {
-    userType = "student"
-  }
-
-  let test = $("<p>").text(userType);
-  
-  questions.append(test); 
 
 }
 
