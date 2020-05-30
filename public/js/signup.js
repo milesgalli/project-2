@@ -45,23 +45,19 @@ $(document).ready(function() {
     $("#alert").fadeIn(500);
   }
 
+  const questions = $(".questionsAppend");
 
-const questions = $(".questionsAppend");
-
-let states = {
-  counter: 0,
-  inputData: {
-    email: "1",
-    password: "null",
-    user_type: "null"
-  },  // student / company
-}
- 
-  //step listener func
+  let states = {
+    counter: 0,
+    inputData: {
+      email: "1",
+      password: "null",
+      user_type: "null"
+    },  // student / company
+  }
 
   //when next is clicked add 1 to state
   //when previous is clicked -1 to state
-
   $("#next").click(function add() {
 
     if (states.counter <= 5) {
@@ -89,72 +85,67 @@ let states = {
       console.log(states.counter)
     }
 
+    //next is displayed when going back
     $("#next").removeAttr('style');
     $("#submitAppend").css("display", "none")
 
   })
 
-  //if states.counter === this number, or/and student is checked append this
+  function renderUserTypeOnSignup() {
 
-function renderUserTypeOnSignup() {
+    questions.empty()
 
-  questions.empty()
+    let isStudent = $("#studentInput").prop("checked")
+    let isCompany = $("#companyInput").prop("checked")
 
-  let isStudent = $("#studentInput").prop("checked")
-  let isCompany = $("#companyInput").prop("checked")
+    if (isStudent) {
 
-  let userType;
-
-  if (isStudent) {
-    userType = "student"
-
-    let studentQuestionText = `
-        <label for="exampleInputCourse">What course did you gaduate from?</label>
+      let studentQuestionText = `
+          <label for="exampleInputCourse">What course did you gaduate from?</label>
+          <div class="control">
+            <input type="text" class="input" id="course-input">
+          </div>
+        </div>
+        <div class="field">
+          <label for="exampleInputTechnologies">What technology feilds are you experienced in?</label>
+          <div class="control">
+            <input type="text" class="input" id="technology-input">
+          </div>
+        </div>
+        <div class="field">
         <div class="control">
-          <input type="text" class="input" id="course-input">
+          <label class="radio" for="exampleInputEmployment">Are you looking for employment?
+            <input type="radio" name="answer">Yes
+          </label>
+          <label class="radio">
+            <input type="radio" name="answer">No
+          </label>
+        </div>
+      </div>
+      `;
+      questions.append(studentQuestionText);
+    }
+    if (isCompany) {
+
+      let companyQuestionText = `
+        <label for="exampleInputIndustry">What industry is your company in?</label>
+        <div class="control">
+          <input type="text" class="input" id="industry-input">
         </div>
       </div>
       <div class="field">
-        <label for="exampleInputTechnologies">What technology feilds are you experienced in?</label>
+        <label for="exampleInputMaxEmployees">How many employees do you have?</label>
         <div class="control">
-          <input type="text" class="input" id="technology-input">
+          <input type="text" class="input" id="MaxEmployees-input">
         </div>
       </div>
-      <div class="field">
-      <div class="control">
-        <label class="radio" for="exampleInputEmployment">Are you looking for employment?
-          <input type="radio" name="answer">Yes
-        </label>
-        <label class="radio">
-          <input type="radio" name="answer">No
-        </label>
-      </div>
-    </div>
-    `;
-    questions.append(studentQuestionText);
+      `;
+      questions.append(companyQuestionText);
+    } 
+
   }
-  if (isCompany) {
-    userType = 'company'
 
-    let companyQuestionText = `
-      <label for="exampleInputIndustry">What industry is your company in?</label>
-      <div class="control">
-        <input type="text" class="input" id="industry-input">
-      </div>
-    </div>
-    <div class="field">
-      <label for="exampleInputMaxEmployees">How many employees do you have?</label>
-      <div class="control">
-        <input type="text" class="input" id="MaxEmployees-input">
-      </div>
-    </div>
-    `;
-    questions.append(companyQuestionText);
-  } 
-
-}
-
-//getting data from user input
+  //getting data from user input
 
 });
 
