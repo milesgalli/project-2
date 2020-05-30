@@ -11,6 +11,9 @@ module.exports = function(app) {
     if (req.user) {
       res.redirect("/members");
     }
+
+    // if use handlebar need to use the 'render' function
+
     res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
 
@@ -22,9 +25,40 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
+
+  app.get('/create-hackathon', function(req, res){
+
+  })
+
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, function(req, res) {
+
+    // check user type
+    let isCompanyUser = true  // FIX this
+
+    // if company user redirect to company profile pg
+    if(isCompanyUser){
+
+      // TODO: fetch hackathonds data from db
+
+      //  TODO: fetch company data from db
+      res.render('company-dashboard', {
+        hackathons:  [],
+        company: {}
+      })
+    }else{
+
+
+      res.render('student.-dashboard', {})
+    }
+
+    // if student user redirect to student profile page
+
+
+    // render
+    res.render()
+
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
