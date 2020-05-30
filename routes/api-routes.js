@@ -15,6 +15,7 @@ module.exports = function(app) {
     res.json({
       email: req.user.email,
       id: req.user.id,
+
     });
   });
 
@@ -28,6 +29,12 @@ module.exports = function(app) {
     db.User.create({
       email: req.body.email,
       password: req.body.password,
+      fullName:req.body.password, 
+      location: req.body.location, 
+      technologies: req.body.technologies, 
+      courseGraduated: req.body.courseGraduated, 
+      employment: req.body.employment, 
+
     })
       .then(function() {
         res.redirect(307, "/api/login");
