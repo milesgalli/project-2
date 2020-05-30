@@ -76,6 +76,12 @@ $(document).ready(function() {
       $("#submitAppend").append(`<a type="submit" class="button is-light">Sign Up</a>`)
     } 
 
+    //error if student or company isnt clicked
+
+    if (!$("#studentInput").is(':checked') || !$("#companyInput").is(':checked')) {
+      questionsError();
+    }
+
   })
 
   $("#previous").click(function add() {
@@ -143,6 +149,16 @@ $(document).ready(function() {
       questions.append(companyQuestionText);
     } 
 
+  }
+  
+  function questionsError() {
+    questions.empty();
+
+    let userChoiceError = `
+    <p>Please choose a Student or Company on the prevous tabs before continuing<p>
+    `
+
+    questions.append(userChoiceError)
   }
 
   //getting data from user input
