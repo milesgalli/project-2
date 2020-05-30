@@ -1,8 +1,16 @@
+
 $(document).ready(function() {
   // Getting references to our form and input
   var signUpForm = $("form.signup");
   var emailInput = $("input#email-input");
   var passwordInput = $("input#password-input");
+  var studentInput = $("#studentInput");
+  var companyInput = $("#companyInput");
+
+  // emailInput.on('change', function(event){
+  //   let input = event.
+  // })
+
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
@@ -24,10 +32,7 @@ $(document).ready(function() {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function signUpUser(email, password) {
-    $.post("/api/signup", {
-      email: email,
-      password: password
-    })
+    $.post("/api/signup", states.inputData)
       .then(function(data) {
         window.location.replace("/members");
         // If there's an error, handle it by throwing up a bootstrap alert
@@ -39,4 +44,82 @@ $(document).ready(function() {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);
   }
+
+
+  //student or company questions appeneded
+  function questions() {
+
+    const questions = $(".questionsAppend");
+
+    if ($("#studentInput").prop("checked")) {
+
+      let test = $("<p>").text("student");
+  
+      questions.append(test); 
+
+    } if (companyInput.prop("checked")) {
+
+      let test = $("<p>").text("company");
+
+      questions.append(test);
+    }
+
+  }
+
+questions();
+
+let states = {
+  inputData: {
+    email: "1",
+    password: "null",
+    user_type: "null"
+  },  // studetn / company
+  inputData: {
+    email: "2",
+    password: "null",
+    user_type: "null"
+  },
+  inputData: {
+    email: "3",
+    password: "null",
+    user_type: "null"
+  },
+  inputData: {
+    email: "4",
+    password: "null",
+    user_type: "null"
+  }
+}
+
+  console.log(states);  
+
+  //step listener func
+
+  //when next is clicked add 1 to state
+  //when previous is clicked -1 to state
+  let counter = 0
+
+  $("#next").click(function add() {
+
+    if (counter <= 5) {
+      counter++;
+      console.log(counter)
+      //console.log(states.inputData[counter])
+      console.log(states.inputData.email[counter])
+    }
+  })
+
+  $("#previous").click(function add() {
+
+    if (counter >= -1) {
+      counter--;
+      console.log(counter)
+      //console.log(states.inputData[counter])
+      console.log(states.inputData.email[counter])
+    }
+  })
+
+  //console.log(states[counter])
+
 });
+

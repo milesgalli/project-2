@@ -74,70 +74,45 @@
       </div>
       <!-- step 2 -->
       <div class="step-content has-text-centered">
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Firstname</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <input class="input" name="firstname" id="firstname" type="text" placeholder="Firstname" autofocus data-validate="require">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Last name</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control has-icon has-icon-right">
-                <input class="input" type="text" name="lastname" id="lastname" placeholder="Last name" data-validate="require">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Email</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control has-icon has-icon-right">
-                <input class="input" type="email" name="email" id="email" placeholder="Email" data-validate="require">
+
+        <div class="columns">
+          <div class="column is-4"></div>
+
+          <div class="column is-4">
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <label class="radio">
+                    <input type="checkbox" name="answer" id="studentInput">Student
+                  </label>
+                  <label class="radio">
+                    <input type="checkbox" name="answer" id="companyInput">Company
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- step 3 -->
+
+      <!-- step 3 where student or company questions appear -->
       <div class="step-content has-text-centered">
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Facebook account</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <input class="input" name="facebook" id="facebook" type="text" placeholder="Facebook account url" autofocus data-validate="require">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Twitter account</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <input class="input" name="twitter" id="twitter" type="text" placeholder="Twitter account url" autofocus data-validate="require">
+
+        <div class="columns">
+          <div class="column is-4"></div>
+
+          <div class="column is-4">
+            <div class="field-body">
+              <div class="field">
+                <div class="control questionsAppend">
+
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <!-- step 4 -->
       <div class="step-content has-text-centered">
         <h1 class="title is-4">Your account is now created!</h1>
@@ -147,10 +122,10 @@
     
     <div class="steps-actions">
       <div class="steps-action">
-        <a href="#" data-nav="previous" class="button is-light">Previous</a>
+        <a href="#" data-nav="previous" id="previous" class="button is-light">Previous</a>
       </div>
       <div class="steps-action">
-        <a href="#" data-nav="next" class="button is-light">Next</a>
+        <a href="#" data-nav="next" id="next" class="button is-light">Next</a>
       </div>
     </div>
 
