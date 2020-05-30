@@ -1,0 +1,48 @@
+<!--main contents-->
+<section class="container">
+    <div class="columns">
+        <div class="column is-3">
+            <div class="box">
+
+                <!--this is the image of the user-->
+                <article class="media">
+                    <figure class="image is-64x64">
+                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                    </figure>
+
+                    <!--this is the student basic info, from the sign up data-->
+                     <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>Student basic info</strong>
+                            <ul>
+                                {{#each User}}
+                                    <li>
+                                        <p>Full Name: {{fullname}}</p>
+                                        <p>Location: {{location}}</p>
+                                        <p>Technologies: {{technologies}}</p>
+                                        <p>Graduated: {{course_graduated}}</p>
+                                        <p>Employment status: {{employment}}</p>
+                                    </li>
+                                {{/each}}
+                            </ul>
+
+                            <br>
+                            
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+    <!--here is the list of the saved hackathon lists-->
+        <div class="column is-8">
+             {{#each Hackathon}}
+                {{#if saved}}
+                {{> partials/hackathon-block saved=true}}
+                {{/if}}
+                {{/each}} 
+        </div>
+    </div>
+</section>

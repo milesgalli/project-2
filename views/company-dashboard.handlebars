@@ -1,0 +1,45 @@
+<!--main contents-->
+<section class="container">
+    <div class="columns">
+        <div class="column is-3">
+            <div class="box">
+                <!--this is the image of the user-->
+                <article class="media">
+                    <figure class="image is-64x64">
+                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                    </figure>
+
+                    <!--Here is basic information of the company, data is from the sign up page-->
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>Company basic info</strong>
+                                <ul>
+                                {{#each Company}}
+                                <li>
+                                    <p>Company Name: {{companyName}}</p>
+                                    <p>Number of Employesss: {{numberEmployees}}</p>
+                                    <p>Industry: {{industry}}</p>
+                                    <p>Location: {{location}}</p>
+                                </li>
+                                {{/each}}
+                                </ul>
+                                <br>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+        <!--this is the hackthon lists the company created--> 
+            <div class="column is-8">
+
+                {{#each Hackathons}}
+                {{#if created}}
+                {{> partials/hackathon-block created=true}}
+                {{/if}}
+                {{/each}}
+            </div>       
+        </div>
+    </div>
+</section>
