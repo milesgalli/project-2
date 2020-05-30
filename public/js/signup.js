@@ -65,12 +65,12 @@ $(document).ready(function() {
       console.log(states.counter)
     }
 
-    if(states.counter === 2 ){
+    if(states.counter === 2){
       // we are currently in social page
       renderUserTypeOnSignup()
     }
 
-    if (states.counter === 3 ) {
+    if (states.counter === 3) {
       //hide next btn on last step, create submit
       $("#next").attr('style', 'display:none;');
       $("#submitAppend").append(`<a type="submit" class="button is-light">Sign Up</a>`)
@@ -86,7 +86,7 @@ $(document).ready(function() {
     }
 
     //next is displayed when going back
-    $("#next").removeAttr('style');
+    $("#next").show();
     $("#submitAppend").css("display", "none")
 
   })
@@ -146,6 +146,7 @@ $(document).ready(function() {
   }
 
   //getting data from user input
+
 
 });
 
