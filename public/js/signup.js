@@ -4,24 +4,32 @@ $(document).ready(function() {
   let signUpForm = $("form.signup");
   let emailInput = $("input#email-input");
   let passwordInput = $("input#password-input");
+  let locationInput = $("input#location-input")
 
-  let studentInput = $("#studentInput");
-  let studentNameInput = $("exampleInputFullName");
-  let CourseGradInput = $("exampleInputCourse");
-  let technologyInput = $("exampleInputTechnologies");
-  let employmentInput = $("exampleInputEmployment");
+  // let studentInput = $("#studentInput");
+  let studentNameInput = $("input#fullName-input");
+  let courseInput = $("input#course-input");
+  let technologyInput = $("input#technology-input");
+  // let employmentInput = $("#");
 
-  let companyInput = $("#companyInput");
-  let companyNameInput = $("exampleInputCompanyName");
-  let industryInput = $("exampleInputIndustry");
-  let maxEmployeesInput = $("exampleInputMaxEmployees");
+  // let companyInput = $("input#companyInput");
+  let companyNameInput = $("input#companyName-input");
+  let industryInput = $("input#industry-input");
+  let maxEmployeesInput = $("input#maxEmployees");
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
     event.preventDefault();
     let userData = {
       email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInput.val().trim(),
+      location: locationInput.val().trim(),
+      technologies: technologyInput.val().trim(),
+      course_graduated: courseInput.val().trim(),
+      employment: employmentInput.val().trim(),
+      industry: industryInput.val().trim(),
+      numberEmployees: maxEmployeesInput.val().trim(),
+
     };
 
     if (!userData.email || !userData.password) {
@@ -158,7 +166,7 @@ $(document).ready(function() {
       <div class="field">
         <label for="exampleInputMaxEmployees">How many employees do you have?</label>
         <div class="control">
-          <input type="text" class="input" id="MaxEmployees-input">
+          <input type="text" class="input" id="maxEmployees-input">
         </div>
       </div>
       `;
