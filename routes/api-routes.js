@@ -1,7 +1,20 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const { Octokit } = require('@octokit/rest');
 
+exports.getGithub = async (req, res, next) => {
+  const github = new Octokit();
+  try {
+    const { data: repo } = await github.repos.get({ owner: 'Pete331', repo: 'project-2' });
+    res.render('api/github', {
+      title: 'GitHub API',
+      repo
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -83,19 +96,17 @@ module.exports = function(app) {
 
   app.post("api/hackathons", function(req, res) {
     db.Hackathon.create({
-
       title: req.body.title,
       description: req.boby.description,
       maxStudent: req.body.description,
       startDate: req.body.description,
       endDate: req.body.endDate,
-      
     }).then(function(dbHackathon) {
       res.json(dbHackathon);
     });
   });
 
-  // Route for deleting hackathons post 
+  // Route for deleting hackathons post
   app.delete("/api/hackathons/:id", function(req, res) {
     db.Hackathon.destroy({
       where: {
@@ -107,24 +118,21 @@ module.exports = function(app) {
   });
 
   // route for updating hackathon posts
-  app
-    .put("api/hackathons", function(req, res) {
-      db.Hackathon.update(req.body, {
-        where: {
-          title: req.body.title,
-          description: req.body.description,
-          maxStudent: req.body.maxStudent,
-          startDate: req.body.startDate,
-          endDate: req.body.endDate,
-        },
-      });
-    })
-    .then(function(dbHackathon) {
+  app.put("api/hackathons", function(req, res) {
+    db.Hackathon.update(req.body, {
+      where: {
+        title: req.body.title,
+        description: req.body.description,
+        maxStudent: req.body.maxStudent,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+      },
+    }).then(function(dbHackathon) {
       res.json(dbHackathon);
     });
+  });
 
-// need to create a get method for  when a user clicks going to a hackathon 
-
+  // need to create a get method for  when a user clicks going to a hackathon
 
   //last parenthesis for app
 };
