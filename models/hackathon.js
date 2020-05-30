@@ -13,7 +13,7 @@ module.exports = function (sequelize,DataTypes) {
 
   Hackathon.associate = function (models) {
     Hackathon.belongsTo(models.Company, {
-      foreignKey: "companyIdentification",
+      foreignKey: "CompanyId",
     });
     Hackathon.belongsToMany(models.User, { through: "HackathonUser" });
 

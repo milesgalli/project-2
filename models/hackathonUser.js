@@ -1,12 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
   const HackathonUser = sequelize.define("HackathonUser", {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
 
-    userIdentification: {
-      type: DataTypes.INTEGER,
+    UserId: {
+      type: DataTypes.INTEGER,primaryKey: true, 
     },
-    hackathonIdentification: {
-      type: DataTypes.INTEGER,
+    HackathonId: {
+      type: DataTypes.INTEGER,primaryKey: true, 
     },
   });
 
