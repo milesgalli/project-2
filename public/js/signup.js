@@ -123,10 +123,10 @@ function renderUserTypeOnSignup() {
       <div class="field">
       <div class="control">
         <label class="radio" for="exampleInputEmployment">Are you looking for employment?
-          <input type="checkbox" name="answer">Yes
+          <input type="radio" name="answer">Yes
         </label>
         <label class="radio">
-          <input type="checkbox" name="answer">No
+          <input type="radio" name="answer">No
         </label>
       </div>
     </div>
