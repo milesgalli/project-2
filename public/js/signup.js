@@ -1,21 +1,25 @@
 
 $(document).ready(function() {
   // Getting references to our form and input
-  var signUpForm = $("form.signup");
-  var emailInput = $("input#email-input");
-  var passwordInput = $("input#password-input");
-  var studentInput = $("#studentInput");
-  var companyInput = $("#companyInput");
+  let signUpForm = $("form.signup");
+  let emailInput = $("input#email-input");
+  let passwordInput = $("input#password-input");
 
-  // emailInput.on('change', function(event){
-  //   let input = event.
-  // })
+  let studentInput = $("#studentInput");
+  let studentNameInput = $("exampleInputFullName");
+  let CourseGradInput = $("exampleInputCourse");
+  let technologyInput = $("exampleInputTechnologies");
+  let employmentInput = $("exampleInputEmployment");
 
+  let companyInput = $("#companyInput");
+  let companyNameInput = $("exampleInputCompanyName");
+  let industryInput = $("exampleInputIndustry");
+  let maxEmployeesInput = $("exampleInputMaxEmployees");
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
     event.preventDefault();
-    var userData = {
+    let userData = {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()
     };
@@ -107,6 +111,12 @@ $(document).ready(function() {
     if (isStudent) {
 
       let studentQuestionText = `
+          <label for="exampleInputFullName">Full Name</label>
+          <div class="control">
+              <input type="text" class="input" id="fullName-input">
+          </div>
+        </div>
+        <div class="field">
           <label for="exampleInputCourse">What course did you gaduate from?</label>
           <div class="control">
             <input type="text" class="input" id="course-input">
@@ -120,7 +130,7 @@ $(document).ready(function() {
         </div>
         <div class="field">
         <div class="control">
-          <label class="radio" for="exampleInputEmployment">Are you looking for employment?
+          <label class="radio" for="exampleInputEmployment">Were you looking for employment?
             <input type="radio" name="answer">Yes
           </label>
           <label class="radio">
@@ -134,6 +144,12 @@ $(document).ready(function() {
     if (isCompany) {
 
       let companyQuestionText = `
+          <label for="exampleInputCompanyName">Company Name</label>
+          <div class="control">
+            <input type="text" class="input" id="companyName-input">
+          </div>
+        </div>
+        <div class="field">
         <label for="exampleInputIndustry">What industry is your company in?</label>
         <div class="control">
           <input type="text" class="input" id="industry-input">
@@ -151,18 +167,18 @@ $(document).ready(function() {
 
   }
   
-  function questionsError() {
-    questions.empty();
+  // function questionsError() {
+  //   questions.empty();
 
-    let userChoiceError = `
-    <p>Please choose a Student or Company on the prevous tabs before continuing<p>
-    `
+  //   let userChoiceError = `
+  //   <p class="has-text-danger">Please choose a Student or Company on the prevous tabs before continuing<p>
+  //   `
 
-    questions.append(userChoiceError)
-  }
+  //   questions.append(userChoiceError)
+  // }
 
   //getting data from user input
-
+  
 
 });
 
