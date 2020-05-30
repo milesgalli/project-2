@@ -45,81 +45,107 @@ $(document).ready(function() {
     $("#alert").fadeIn(500);
   }
 
+  const questions = $(".questionsAppend");
 
-  //student or company questions appeneded
-  function questions() {
-
-    const questions = $(".questionsAppend");
-
-    if ($("#studentInput").prop("checked")) {
-
-      let test = $("<p>").text("student");
-  
-      questions.append(test); 
-
-    } if (companyInput.prop("checked")) {
-
-      let test = $("<p>").text("company");
-
-      questions.append(test);
-    }
-
+  let states = {
+    counter: 0,
+    inputData: {
+      email: "1",
+      password: "null",
+      user_type: "null"
+    },  // student / company
   }
-
-questions();
-
-let states = {
-  inputData: {
-    email: "1",
-    password: "null",
-    user_type: "null"
-  },  // studetn / company
-  inputData: {
-    email: "2",
-    password: "null",
-    user_type: "null"
-  },
-  inputData: {
-    email: "3",
-    password: "null",
-    user_type: "null"
-  },
-  inputData: {
-    email: "4",
-    password: "null",
-    user_type: "null"
-  }
-}
-
-  console.log(states);  
-
-  //step listener func
 
   //when next is clicked add 1 to state
   //when previous is clicked -1 to state
-  let counter = 0
-
   $("#next").click(function add() {
 
-    if (counter <= 5) {
-      counter++;
-      console.log(counter)
-      //console.log(states.inputData[counter])
-      console.log(states.inputData.email[counter])
+    if (states.counter <= 5) {
+      states.counter++;
+      console.log(states.counter)
     }
+
+    if(states.counter === 2 ){
+      // we are currently in social page
+      renderUserTypeOnSignup()
+    }
+
+    if (states.counter === 3 ) {
+      //hide next btn on last step, create submit
+      $("#next").attr('style', 'display:none;');
+      $("#submitAppend").append(`<a type="submit" class="button is-light">Sign Up</a>`)
+    } 
+
   })
 
   $("#previous").click(function add() {
 
-    if (counter >= -1) {
-      counter--;
-      console.log(counter)
-      //console.log(states.inputData[counter])
-      console.log(states.inputData.email[counter])
+    if (states.counter >= 1) {
+      states.counter--;
+      console.log(states.counter)
     }
+
+    //next is displayed when going back
+    $("#next").removeAttr('style');
+    $("#submitAppend").css("display", "none")
+
   })
 
-  //console.log(states[counter])
+  function renderUserTypeOnSignup() {
+
+    questions.empty()
+
+    let isStudent = $("#studentInput").prop("checked")
+    let isCompany = $("#companyInput").prop("checked")
+
+    if (isStudent) {
+
+      let studentQuestionText = `
+          <label for="exampleInputCourse">What course did you gaduate from?</label>
+          <div class="control">
+            <input type="text" class="input" id="course-input">
+          </div>
+        </div>
+        <div class="field">
+          <label for="exampleInputTechnologies">What technology feilds are you experienced in?</label>
+          <div class="control">
+            <input type="text" class="input" id="technology-input">
+          </div>
+        </div>
+        <div class="field">
+        <div class="control">
+          <label class="radio" for="exampleInputEmployment">Are you looking for employment?
+            <input type="radio" name="answer">Yes
+          </label>
+          <label class="radio">
+            <input type="radio" name="answer">No
+          </label>
+        </div>
+      </div>
+      `;
+      questions.append(studentQuestionText);
+    }
+    if (isCompany) {
+
+      let companyQuestionText = `
+        <label for="exampleInputIndustry">What industry is your company in?</label>
+        <div class="control">
+          <input type="text" class="input" id="industry-input">
+        </div>
+      </div>
+      <div class="field">
+        <label for="exampleInputMaxEmployees">How many employees do you have?</label>
+        <div class="control">
+          <input type="text" class="input" id="MaxEmployees-input">
+        </div>
+      </div>
+      `;
+      questions.append(companyQuestionText);
+    } 
+
+  }
+
+  //getting data from user input
 
 });
 
