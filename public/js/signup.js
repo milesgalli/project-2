@@ -47,79 +47,88 @@ $(document).ready(function() {
 
 
   //student or company questions appeneded
-  function questions() {
+//   function questions() {
 
-    const questions = $(".questionsAppend");
+//     const questions = $(".questionsAppend");
 
-    if ($("#studentInput").prop("checked")) {
+//     if ($("#studentInput").prop("checked")) {
 
-      let test = $("<p>").text("student");
+//       let test = $("<p>").text("student");
   
-      questions.append(test); 
+//       questions.append(test); 
 
-    } if (companyInput.prop("checked")) {
+//     } if (companyInput.prop("checked")) {
 
-      let test = $("<p>").text("company");
+//       let test = $("<p>").text("company");
 
-      questions.append(test);
-    }
+//       questions.append(test);
+//     }
 
-  }
+//   }
 
-questions();
+// questions();
+
+const questions = $(".questionsAppend");
 
 let states = {
+  counter: 0,
   inputData: {
     email: "1",
     password: "null",
     user_type: "null"
-  },  // studetn / company
-  inputData: {
-    email: "2",
-    password: "null",
-    user_type: "null"
-  },
-  inputData: {
-    email: "3",
-    password: "null",
-    user_type: "null"
-  },
-  inputData: {
-    email: "4",
-    password: "null",
-    user_type: "null"
-  }
+  },  // student / company
 }
-
-  console.log(states);  
-
+ 
   //step listener func
 
   //when next is clicked add 1 to state
   //when previous is clicked -1 to state
-  let counter = 0
 
   $("#next").click(function add() {
 
-    if (counter <= 5) {
-      counter++;
-      console.log(counter)
-      //console.log(states.inputData[counter])
-      console.log(states.inputData.email[counter])
+    if (states.counter <= 5) {
+      states.counter++;
+      console.log(states.counter)
     }
+
+    if(states.counter ===2 ){
+      // we are currently in social page
+      renderUserTypeOnSignup()
+    }
+
   })
 
   $("#previous").click(function add() {
 
-    if (counter >= -1) {
-      counter--;
-      console.log(counter)
-      //console.log(states.inputData[counter])
-      console.log(states.inputData.email[counter])
+    if (states.counter >= 1) {
+      states.counter--;
+      console.log(states.counter)
     }
   })
 
-  //console.log(states[counter])
+  //if states.counter === this number, or/and student is checked append this
+
+function renderUserTypeOnSignup() {
+
+  let isCompany = $("#companyInput").prop("checked")
+  let isStudent = $("#studentInput").prop("checked")
+
+  let userType;
+
+  if (isCompany) {
+    userType = 'company'
+
+
+  } 
+  if (isStudent) {
+    userType = "student"
+  }
+
+  let test = $("<p>").text(userType);
+  
+  questions.append(test); 
+
+}
 
 });
 
