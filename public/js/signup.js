@@ -65,16 +65,22 @@ $(document).ready(function() {
       console.log(states.counter)
     }
 
-    if(states.counter === 2 ){
+    if(states.counter === 2){
       // we are currently in social page
       renderUserTypeOnSignup()
     }
 
-    if (states.counter === 3 ) {
+    if (states.counter === 3) {
       //hide next btn on last step, create submit
       $("#next").attr('style', 'display:none;');
       $("#submitAppend").append(`<a type="submit" class="button is-light">Sign Up</a>`)
     } 
+
+    //error if student or company isnt clicked
+
+    if (!$("#studentInput").is(':checked') || !$("#companyInput").is(':checked')) {
+      questionsError();
+    }
 
   })
 
@@ -86,7 +92,7 @@ $(document).ready(function() {
     }
 
     //next is displayed when going back
-    $("#next").removeAttr('style');
+    $("#next").show();
     $("#submitAppend").css("display", "none")
 
   })
@@ -144,8 +150,19 @@ $(document).ready(function() {
     } 
 
   }
+  
+  function questionsError() {
+    questions.empty();
+
+    let userChoiceError = `
+    <p>Please choose a Student or Company on the prevous tabs before continuing<p>
+    `
+
+    questions.append(userChoiceError)
+  }
 
   //getting data from user input
+
 
 });
 
