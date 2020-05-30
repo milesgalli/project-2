@@ -2,7 +2,6 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
-
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -25,7 +24,7 @@ module.exports = function(app) {
 
   // LEAVE
 
-  app.post("/api/signup", function(req, res) {
+  app.post("/api/user/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
       password: req.body.password,
@@ -34,9 +33,13 @@ module.exports = function(app) {
         res.redirect(307, "/api/login");
       })
       .catch(function(err) {
-        res.status(401).json(err);
+        res.status(422).json(err);
       });
   });
+
+  // redirect company to signup form
+
+  //post request
 
   // Route for logging user out
   app.get("/logout", function(req, res) {
@@ -61,7 +64,7 @@ module.exports = function(app) {
 
   // Get Route for finding all Hackathons
 
-  app.get("api/hackathons/", function(req, res) {
+  app.get("/api/hackathons/", function(req, res) {
     db.Hackathon.findAll({}).then(function(dbHackathon) {
       res.json(dbHackathon);
     });
@@ -69,7 +72,7 @@ module.exports = function(app) {
 
   // Get Route for retreieving a hackathon post from a specific company
 
-  app.get("api/company/:companyName", function(req, res) {
+  app.get("/api/company/:companyName", function(req, res) {
     db.Hackathon.findAll({
       where: {
         companyName: req.params.companyName,
@@ -79,23 +82,46 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/api/users/join-hackathon/:hackathonId', function(req, res){
+    let user = req.user
+    db.Hackathon.findOne(req.params.hackathonId).then((hackathon) => {
+      user.joinHackaton(hackathon)
+
+    })
+  })
+
+  app.get('/playground', function(req, res){
+    db.User.findOne({where: {id: 1}}).then((user) => {
+      db.Hackathon.findOne({where: {id: 1}}).then((hackathon) => {
+        user.joinHackathon(hackathon)
+        res.json({data: "ok"});
+  
+      })
+    })
+  })
+
   // Post Route for Creating a new Post
 
-  app.post("api/hackathons", function(req, res) {
-    db.Hackathon.create({
+  app.post("/api/hackathons", function(req, res) {
 
+    // if(!req.user.CompanyId){
+    //   res.json({errpr: "You are not a company user!!!"}).status(401)
+    // }
+
+    db.Hackathon.create({
       title: req.body.title,
-      description: req.boby.description,
-      maxStudent: req.body.description,
-      startDate: req.body.description,
+      description: req.body.description,
+      maxStudent: req.body.maxStudent,
+      startDate: req.body.startDate,
       endDate: req.body.endDate,
-      
+      // CompanyId: req.user.CompanyId
+      CompanyId: null  // FIXME: fix this req.user.CompanyId
     }).then(function(dbHackathon) {
       res.json(dbHackathon);
     });
   });
 
-  // Route for deleting hackathons post 
+  // Route for deleting hackathons post
   app.delete("/api/hackathons/:id", function(req, res) {
     db.Hackathon.destroy({
       where: {
@@ -107,24 +133,21 @@ module.exports = function(app) {
   });
 
   // route for updating hackathon posts
-  app
-    .put("api/hackathons", function(req, res) {
-      db.Hackathon.update(req.body, {
-        where: {
-          title: req.body.title,
-          description: req.body.description,
-          maxStudent: req.body.maxStudent,
-          startDate: req.body.startDate,
-          endDate: req.body.endDate,
-        },
-      });
-    })
-    .then(function(dbHackathon) {
+  app.put("/api/hackathons", function(req, res) {
+    db.Hackathon.update(req.body, {
+      where: {
+        title: req.body.title,
+        description: req.body.description,
+        maxStudent: req.body.maxStudent,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+      },
+    }).then(function(dbHackathon) {
       res.json(dbHackathon);
     });
+  });
 
-// need to create a get method for  when a user clicks going to a hackathon 
-
+  // need to create a GET method for  when a user clicks going to a hackathon. 
 
   //last parenthesis for app
 };
