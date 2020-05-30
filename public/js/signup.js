@@ -18,33 +18,35 @@ $(document).ready(function() {
   let maxEmployeesInput = $("input#maxEmployees");
 
   // When the signup button is clicked, we validate the email and password are not blank
-  signUpForm.on("submit", function(event) {
+  signUpForm.on("#submit", function(event) {
+    //states.counter = 0;
     event.preventDefault();
     let userData = {
-      email: emailInput.val().trim(),
-      password: passwordInput.val().trim(),
-      location: locationInput.val().trim(),
-      technologies: technologyInput.val().trim(),
-      course_graduated: courseInput.val().trim(),
-      employment: employmentInput.val().trim(),
-      industry: industryInput.val().trim(),
-      numberEmployees: maxEmployeesInput.val().trim(),
+      email: emailInput.val() ? emailInput.val().trim() : null,
+      password: passwordInput ? passwordInput.val().trim() : null,
+      location: locationInput.val() ? locationInput.val().trim() : null,
+      fullName: studentNameInput.val() ? studentNameInput.val().trim() : null,
+      technologies: technologyInput.val() ? technologyInput.val().trim() : null,
+      course_graduated: courseInput.val() ? courseInput.val().trim() : null,
+      // employment: employmentInput.val() ? employmentInput.val().trim() : null,
+      industry: industryInput.val() ? industryInput.val().trim() : null,
+      numberEmployees: maxEmployeesInput.val() ? maxEmployeesInput.val().trim() : null,
 
     };
-
+    console.log(JSON.stringify(userData));
     if (!userData.email || !userData.password) {
       return;
     }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData.email, userData.password);
+    signUpUser(userData);
     emailInput.val("");
     passwordInput.val("");
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
-  function signUpUser(email, password) {
-    $.post("/api/signup", states.inputData)
+  function signUpUser(userData) {
+    $.post("/api/user/signup", userData)
       .then(function(data) {
         window.location.replace("/members");
         // If there's an error, handle it by throwing up a bootstrap alert
@@ -72,9 +74,9 @@ $(document).ready(function() {
   //when previous is clicked -1 to state
   $("#next").click(function add() {
 
-    if (states.counter <= 5) {
+    if (states.counter < 4) {
       states.counter++;
-      console.log(states.counter)
+
     }
 
     if(states.counter === 2){
@@ -85,14 +87,8 @@ $(document).ready(function() {
     if (states.counter === 3) {
       //hide next btn on last step, create submit
       $("#next").attr('style', 'display:none;');
-      $("#submitAppend").append(`<a type="submit" class="button is-light">Sign Up</a>`)
+      $("#submitAppend").append(`<button type="submit" class="button is-light">Sign Up</button>`)
     } 
-
-    //error if student or company isnt clicked
-
-    if (!$("#studentInput").is(':checked') || !$("#companyInput").is(':checked')) {
-      questionsError();
-    }
 
   })
 
@@ -100,7 +96,6 @@ $(document).ready(function() {
 
     if (states.counter >= 1) {
       states.counter--;
-      console.log(states.counter)
     }
 
     //next is displayed when going back
@@ -111,81 +106,20 @@ $(document).ready(function() {
 
   function renderUserTypeOnSignup() {
 
-    questions.empty()
-
     let isStudent = $("#studentInput").prop("checked")
     let isCompany = $("#companyInput").prop("checked")
 
     if (isStudent) {
-
-      let studentQuestionText = `
-          <label for="exampleInputFullName">Full Name</label>
-          <div class="control">
-              <input type="text" class="input" id="fullName-input">
-          </div>
-        </div>
-        <div class="field">
-          <label for="exampleInputCourse">What course did you gaduate from?</label>
-          <div class="control">
-            <input type="text" class="input" id="course-input">
-          </div>
-        </div>
-        <div class="field">
-          <label for="exampleInputTechnologies">What technology feilds are you experienced in?</label>
-          <div class="control">
-            <input type="text" class="input" id="technology-input">
-          </div>
-        </div>
-        <div class="field">
-        <div class="control">
-          <label class="radio" for="exampleInputEmployment">Were you looking for employment?
-            <input type="radio" name="answer">Yes
-          </label>
-          <label class="radio">
-            <input type="radio" name="answer">No
-          </label>
-        </div>
-      </div>
-      `;
-      questions.append(studentQuestionText);
+      //unhide/hide questions
+      $(".student-questions").removeClass("hidden")
+      $(".company-questions").addClass("hidden")
     }
     if (isCompany) {
-
-      let companyQuestionText = `
-          <label for="exampleInputCompanyName">Company Name</label>
-          <div class="control">
-            <input type="text" class="input" id="companyName-input">
-          </div>
-        </div>
-        <div class="field">
-        <label for="exampleInputIndustry">What industry is your company in?</label>
-        <div class="control">
-          <input type="text" class="input" id="industry-input">
-        </div>
-      </div>
-      <div class="field">
-        <label for="exampleInputMaxEmployees">How many employees do you have?</label>
-        <div class="control">
-          <input type="text" class="input" id="maxEmployees-input">
-        </div>
-      </div>
-      `;
-      questions.append(companyQuestionText);
+      $(".company-questions").removeClass("hidden")
+      $(".student-questions").addClass("hidden")
     } 
 
   }
-  
-  // function questionsError() {
-  //   questions.empty();
-
-  //   let userChoiceError = `
-  //   <p class="has-text-danger">Please choose a Student or Company on the prevous tabs before continuing<p>
-  //   `
-
-  //   questions.append(userChoiceError)
-  // }
-
-  //getting data from user input
   
 
 });
