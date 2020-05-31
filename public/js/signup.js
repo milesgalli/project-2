@@ -10,7 +10,7 @@ $(document).ready(function() {
   let studentNameInput = $("input#fullName-input");
   let courseInput = $("input#course-input");
   let technologyInput = $("input#technology-input");
-  // let employmentInput = $("#");
+  // let employmentInput = $("input[name=employmentanswer]:checked");
 
   // let companyInput = $("input#companyInput");
   let companyNameInput = $("input#companyName-input");
@@ -18,9 +18,10 @@ $(document).ready(function() {
   let maxEmployeesInput = $("input#maxEmployees");
 
   // When the signup button is clicked, we validate the email and password are not blank
-  signUpForm.on("#submit", function(event) {
+  signUpForm.on("submit", function(event) {
     //states.counter = 0;
     event.preventDefault();
+    // console.log(employmentInput);
     let userData = {
       email: emailInput.val() ? emailInput.val().trim() : null,
       password: passwordInput ? passwordInput.val().trim() : null,
@@ -33,7 +34,8 @@ $(document).ready(function() {
       numberEmployees: maxEmployeesInput.val() ? maxEmployeesInput.val().trim() : null,
 
     };
-    console.log(JSON.stringify(userData));
+    // console.log(userData);
+    // console.log(JSON.stringify(userData));
     if (!userData.email || !userData.password) {
       return;
     }
@@ -46,11 +48,12 @@ $(document).ready(function() {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function signUpUser(userData) {
+    console.log(userData);
     $.post("/api/user/signup", userData)
-      .then(function(data) {
-        window.location.replace("/members");
+      // .then(function(data) {
+      //   window.location.replace("/members");
         // If there's an error, handle it by throwing up a bootstrap alert
-      })
+      // })
       .catch(handleLoginErr);
   }
 
@@ -87,7 +90,7 @@ $(document).ready(function() {
     if (states.counter === 3) {
       //hide next btn on last step, create submit
       $("#next").attr('style', 'display:none;');
-      $("#submitAppend").append(`<button type="submit" class="button is-light">Sign Up</button>`)
+      $("#submit-btn").attr('style', 'display:inline;');
     } 
 
   })
