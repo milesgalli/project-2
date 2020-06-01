@@ -54,7 +54,7 @@ $(document).ready(function() {
     console.log(userData);
     $.post("/api/user/signup", userData)
       .then(function(data) {
-        // window.location.replace("/members");
+        window.location.replace("/student-dashboard");
       // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
