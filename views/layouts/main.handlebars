@@ -4,6 +4,10 @@
 <head>
     <meta charset="utf-8">
     <title>Basic structure </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
+    <link href="stylesheets/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
     <link href="stylesheets/style.css" rel="stylesheet">
@@ -13,42 +17,24 @@
 <body>
 
     <!--navigation bar-->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                <!--this is the logo image-->
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-            </a>
-        </div>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="/feed.html">
-                    Main
-                </a>
+    {{#if currentUser && currentUser.CompanyId }}
 
-                <a class="navbar-item" href="/student-profile.html">
-                    My Company Profile
-                </a>
+    {{!--if the login user is a company user--}}
+    {{> partials/navgars/company-navbar}}
+    {{/if }}
 
-                <a class="navbar-item" href="/student-profile.html">
-                    My users
-                </a>
+    {{#if currentUser && currentUser.CompanyId=null }}
+    {{!--if the login user is a student user--}}
+    {{> partials/navbars/student-navbar}}
+    {{/if }}
 
-            </div>
+    {{#if currentUser=null }}
+    {{!--if the login user is null--}}
+    {{> partials/navbars/login-signup-navbar}}
+    {{/if }}
 
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-primary" href="">
-                            <strong>Log out</strong>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+    {{!--here is the main content of this page--}}
     {{{ body }}}
 
 </body>
