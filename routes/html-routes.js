@@ -7,14 +7,13 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function(app) {
 
   app.get("/", function(req, res) {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/members");
-    }
-
-    // if use handlebar need to use the 'render' function
-
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
+    res.render("index");
+  });
+  app.get("/student-dashboard", function(req, res) {
+    res.render("student-dashboard");
+  });
+  app.get("/student-dashboard", function(req, res) {
+    res.render("company-dashboard");
   });
 
   app.get("/login", function(req, res) {

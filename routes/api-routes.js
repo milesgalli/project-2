@@ -15,7 +15,6 @@ module.exports = function(app) {
     res.json({
       email: req.user.email,
       id: req.user.id,
-
     });
   });
 
@@ -26,22 +25,46 @@ module.exports = function(app) {
   // LEAVE
 
   app.post("/api/user/signup", function(req, res) {
-    db.User.create({
-      email: req.body.email,
-      password: req.body.password,
-      fullName:req.body.password, 
-      location: req.body.location, 
-      technologies: req.body.technologies, 
-      courseGraduated: req.body.courseGraduated, 
-      employment: req.body.employment, 
-
-    })
-      .then(function() {
-        res.redirect(307, "/api/login");
+    console.log(req.body);
+    if (req.body.role === "student") {
+      console.log("creating student");
+      db.User.create({
+        email: req.body.email,
+        password: req.body.password,
+        fullName: req.body.fullName,
+        location: req.body.location,
+        role: req.body.role,
+        technologies: req.body.technologies,
+        courseGraduated: req.body.courseGraduated,
+        employment: req.body.employment,
       })
-      .catch(function(err) {
-        res.status(422).json(err);
+        .then(function() {
+          res.redirect(307, "/api/login");
+        })
+        .catch(function(err) {
+          res.status(422).json(err);
+        });
+    } else {
+      db.User.create({
+        email: req.body.email,
+        password: req.body.password,
+        fullName: req.body.fullName,
+        location: req.body.location,
+        role: req.body.role,
       });
+      db.Company.create({
+        companyName: req.body.companyName,
+        numberEmployees: req.body.numberEmployees,
+        industry: req.body.industry,
+        location: req.body.location,
+      })
+        .then(function() {
+          res.redirect(307, "/api/login");
+        })
+        .catch(function(err) {
+          res.status(422).json(err);
+        });
+    }
   });
 
   // redirect company to signup form
@@ -89,28 +112,25 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/users/join-hackathon/:hackathonId', function(req, res){
-    let user = req.user
+  app.post("/api/users/join-hackathon/:hackathonId", function(req, res) {
+    let user = req.user;
     db.Hackathon.findOne(req.params.hackathonId).then((hackathon) => {
-      user.joinHackaton(hackathon)
+      user.joinHackaton(hackathon);
+    });
+  });
 
-    })
-  })
-
-  app.get('/playground', function(req, res){
-    db.User.findOne({where: {id: 1}}).then((user) => {
-      db.Hackathon.findOne({where: {id: 1}}).then((hackathon) => {
-        user.joinHackathon(hackathon)
-        res.json({data: "ok"});
-  
-      })
-    })
-  })
+  app.get("/playground", function(req, res) {
+    db.User.findOne({ where: { id: 1 } }).then((user) => {
+      db.Hackathon.findOne({ where: { id: 1 } }).then((hackathon) => {
+        user.joinHackathon(hackathon);
+        res.json({ data: "ok" });
+      });
+    });
+  });
 
   // Post Route for Creating a new Post
 
   app.post("/api/hackathons", function(req, res) {
-
     // if(!req.user.CompanyId){
     //   res.json({errpr: "You are not a company user!!!"}).status(401)
     // }
@@ -122,7 +142,7 @@ module.exports = function(app) {
       startDate: req.body.startDate,
       endDate: req.body.endDate,
       // CompanyId: req.user.CompanyId
-      CompanyId: null  // FIXME: fix this req.user.CompanyId
+      CompanyId: null, // FIXME: fix this req.user.CompanyId
     }).then(function(dbHackathon) {
       res.json(dbHackathon);
     });
@@ -154,7 +174,7 @@ module.exports = function(app) {
     });
   });
 
-  // need to create a GET method for  when a user clicks going to a hackathon. 
+  // need to create a GET method for  when a user clicks going to a hackathon.
 
   //last parenthesis for app
 };

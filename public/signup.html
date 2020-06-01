@@ -57,10 +57,10 @@
               <div class="field">
                 <div class="control">
                   <label class="radio">
-                    <input type="radio" name="answer" id="studentInput">Student
+                    <input type="radio" name="role-answer" value="student" checked="checked" id="studentInput">Student
                   </label>
                   <label class="radio">
-                    <input type="radio" name="answer" id="companyInput">Company
+                    <input type="radio" name="role-answer" value="company" id="companyInput">Company
                   </label>
                 </div>
               </div>
@@ -133,10 +133,10 @@
               <div class="field">
                 <div class="control">
                   <label class="radio" for="exampleInputEmployment">Were you looking for employment?
-                    <input type="radio" name="answer">Yes
+                    <input type="radio" name="employmentanswer" value="yes">Yes
                   </label>
                   <label class="radio">
-                    <input type="radio" name="answer">No
+                    <input type="radio" name="employmentanswer" value="no">No
                   </label>
                 </div>
               </div>
@@ -181,11 +181,10 @@
       </div>
       <div class="steps-action">
         <a href="#" data-nav="next" id="next" class="button is-light">Next</a>
-      </div>
+        <button id="submit-btn" style="display: none;" type="submit" class="button is-light">Sign Up</button>
+      </div>    
     </div>
-    <div id="submitAppend">
-
-    </div>
+  
 
   </form>
     <br />
