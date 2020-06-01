@@ -9,22 +9,16 @@ module.exports = function(app) {
     res.render("index");
   });
 
-  app
-    .get("/student-dashboard", isAuthenticated, function(req, res) {
-      console.log(req.user);
-      // console.log(results);
+  app.get("/signup", function(req, res) {
+    res.render("signup");
+  });
 
-      // res.json(results);
-      res.render("student-dashboard", req.user);
-    })
- 
-
-  app.get("/login", function(req, res) {
-    res.render("login");
+  app.get("/dashboard", isAuthenticated, function(req, res) {
+    console.log(req.user);
+    res.render("dashboard", req.user);
   });
 
   app.get("/create-hackathon", function(req, res) {});
-
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, function(req, res) {

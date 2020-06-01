@@ -61,3 +61,22 @@ school table
 
 
 
+    {{!-- <!--navigation bar-->
+
+    {{#if currentUser && currentUser.CompanyId }}
+
+    {{!--if the login user is a company user--}}
+    {{> partials/navgars/company-navbar}}
+    {{/if }}
+
+    {{#if currentUser && currentUser.CompanyId=null }}
+    {{!--if the login user is a student user--}}
+    {{> partials/navbars/student-navbar}}
+    {{/if }}
+
+    {{#if currentUser=null }}
+    {{!--if the login user is null--}}
+    {{> partials/navbars/login-signup-navbar}}
+    {{/if }} --}}
+
+    {{!--here is the main content of this page--}}
