@@ -9,6 +9,8 @@ module.exports = function(app) {
 
   // could have api/student signup
 
+
+
   // LEAVE
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     // Sending back a password, even a hashed password, isn't a good idea

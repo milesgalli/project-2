@@ -23,12 +23,15 @@ const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-app.use(function(req,res,next){
-  exphbs.registerHelper('currentUser', function(block) {
-    return req.user; //just return global variable value
-  });
-  next()
-})
+
+
+// app.use(function(req,res,next){
+//   exphbs.registerHelper('currentUser', function(block) {
+//     return req.user; //just return global variable value
+//   });
+//   next()
+// })
+
 // Requiring our routes
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);

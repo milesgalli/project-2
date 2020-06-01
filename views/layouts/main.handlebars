@@ -8,33 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
     <link href="stylesheets/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
-    <link href="stylesheets/style.css" rel="stylesheet">
+
 </head>
 
 
 <body>
 
-    <!--navigation bar-->
-
-    {{#if currentUser && currentUser.CompanyId }}
-
-    {{!--if the login user is a company user--}}
-    {{> partials/navgars/company-navbar}}
-    {{/if }}
-
-    {{#if currentUser && currentUser.CompanyId=null }}
-    {{!--if the login user is a student user--}}
-    {{> partials/navbars/student-navbar}}
-    {{/if }}
-
-    {{#if currentUser=null }}
-    {{!--if the login user is null--}}
-    {{> partials/navbars/login-signup-navbar}}
-    {{/if }}
-
-    {{!--here is the main content of this page--}}
+{{> navbars/navbar}}
     {{{ body }}}
 
 </body>

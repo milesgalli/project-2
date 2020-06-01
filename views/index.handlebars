@@ -1,28 +1,30 @@
-<section class="container">
-    <div class="columns">
-        <div class="column is-3">
-            <a class="button is-primary is-block is-alt is-large" href="#">New Post</a>
-            <aside class="menu">
-                <p class="menu-label">
-                    Tags ?
-                </p>
-                <ul class="menu-list">
-                    <li><span class="tag is-primary is-medium ">HTML</span></li>
-                    <li><span class="tag is-link is-medium ">CSS</span></li>
-                    <li><span class="tag is-light is-danger is-medium ">JAVASCRIPT</span></li>
-                    <li><span class="tag is-dark is-medium ">FRONTEND</span></li>
-                    <li><span class="tag is-success is-medium ">BACKEND</span></li>
-                    <li><span class="tag is-warning is-medium ">NODE</span></li>
-                    <li><span class="tag is-medium ">MYSQL</span></li>
-                </ul>
-            </aside>
-        </div>
-        <div class="column is-9">
+<div class="columns">
+    <div class="column is-4"></div>
 
-            {{#each Hackathons}}
-            {{> partials/hackathon-block }}
-            {{/each}}
-
-        </div>
+    <div class="column is-4">
+        <h2>Login Form</h2>
+        <form class="login">
+            <div class="field">
+                <label for="exampleInputEmail1">Email address</label>
+                <div class="control">
+                    <input type="email" class="input" class="form-control" id="email-input" placeholder="Email">
+                </div>
+            </div>
+            <div class="field">
+                <label for="exampleInputPassword1">Password</label>
+                <div class="control">
+                    <input type="password" class="input" class="form-control" id="password-input"
+                        placeholder="Password">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Login</button>
+        </form>
+        <br />
+        <p>Or sign up <a href="/signup">here</a></p>
     </div>
-</section>
+
+    <div class="column is-4"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/login.js"></script>

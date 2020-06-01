@@ -37,7 +37,7 @@ $(document).ready(function() {
         ? maxEmployeesInput.val().trim()
         : null,
     };
-    console.log(userData);
+    // console.log(userData);
     // console.log(JSON.stringify(userData));
     if (!userData.email || !userData.password) {
       return;
@@ -51,10 +51,10 @@ $(document).ready(function() {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function signUpUser(userData) {
-    console.log(userData);
+    // console.log(userData);
     $.post("/api/user/signup", userData)
       .then(function(data) {
-        window.location.replace("/student-dashboard");
+        window.location.replace("/dashboard");
       // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
