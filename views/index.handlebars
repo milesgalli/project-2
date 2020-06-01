@@ -1,0 +1,28 @@
+<section class="container">
+    <div class="columns">
+        <div class="column is-3">
+            <a class="button is-primary is-block is-alt is-large" href="#">New Post</a>
+            <aside class="menu">
+                <p class="menu-label">
+                    Tags ?
+                </p>
+                <ul class="menu-list">
+                    <li><span class="tag is-primary is-medium ">HTML</span></li>
+                    <li><span class="tag is-link is-medium ">CSS</span></li>
+                    <li><span class="tag is-light is-danger is-medium ">JAVASCRIPT</span></li>
+                    <li><span class="tag is-dark is-medium ">FRONTEND</span></li>
+                    <li><span class="tag is-success is-medium ">BACKEND</span></li>
+                    <li><span class="tag is-warning is-medium ">NODE</span></li>
+                    <li><span class="tag is-medium ">MYSQL</span></li>
+                </ul>
+            </aside>
+        </div>
+        <div class="column is-9">
+
+            {{#each Hackathons}}
+            {{> partials/hackathon-block }}
+            {{/each}}
+
+        </div>
+    </div>
+</section>
