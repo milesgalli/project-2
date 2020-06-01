@@ -1,45 +1,53 @@
 <!--main contents-->
 <section class="container">
     <div class="columns">
-        <div class="column is-3">
+        <div class="column is-5">
             <div class="box">
 
                 <!--this is the image of the user-->
                 <article class="media">
-                    <figure class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                    </figure>
+
 
                     <!--this is the student basic info, from the sign up data-->
                     <div class="media-content">
                         <div class="content">
-                            <p>
-                                <strong>Student basic info</strong>
+                            {{#unless role}}
+
+                            <strong>Student Information</strong>
                             <ul>
-                                {{fullName}}
-                                {{email}}
-                                {{technologies}}
-                                {{courseGraduated}}
-                                {{employment}}
-                                {{location}}
+                                <p>Name: {{fullName}}</p>
+                                <p>Email: {{email}}</p>
+                                <p>Technologies: {{technologies}}</p>
+                                <p>Course: {{courseGraduated}}</p>
+                                <p>Looking for work? {{employment}}</p>
+                                <p>Location: {{location}}</p>
                             </ul>
-
-                            <br>
-
-                            </p>
+                            {{/unless}}
                         </div>
-                    </div>
-                </article>
-            </div>
-        </div>
+                        <div class="content">
+                            {{#if role}}
 
-        <!--here is the list of the saved hackathon lists-->
-        <div class="column is-8">
-            {{#each Hackathon}}
-            {{#if saved}}
-            {{> partials/hackathon-block saved=true}}
-            {{/if}}
-            {{/each}}
+                            <strong>Company Information</strong>
+                            <ul>
+                                <p>Company Name: {{Company.dataValues.companyName}}</p>
+                                <p>Industry: {{Company.dataValues.industry}}</p>
+                                <p># Employees: {{Company.dataValues.numberEmployees}}</p>
+                                <p>Location: {{Company.dataValues.location}}</p>
+                            </ul>
+                            <div class="buttons"><button class="button is-primary" href="/">Create Hackathon</button>
+                            </div>
+
+                        </div>
+                        {{/if}}
+                    </div>
+            </div>
+            </article>
         </div>
+    </div>
+
+    <!--here is the list of the saved hackathon lists-->
+    <div class="column is-8">
+
+    </div>
     </div>
 </section>

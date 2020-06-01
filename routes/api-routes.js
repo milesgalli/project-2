@@ -28,8 +28,9 @@ module.exports = function(app) {
 
   app.post("/api/user/signup", function(req, res) {
     console.log(req.body);
-    if (req.body.role === "student") {
-      console.log("creating student");
+    // console.log(req.body);
+    if (req.body.role === "0") {
+      // console.log("creating student");
       db.User.create({
         email: req.body.email,
         password: req.body.password,
@@ -53,12 +54,14 @@ module.exports = function(app) {
         fullName: req.body.fullName,
         location: req.body.location,
         role: req.body.role,
+        CompanyId: 1
       });
       db.Company.create({
         companyName: req.body.companyName,
         numberEmployees: req.body.numberEmployees,
         industry: req.body.industry,
         location: req.body.location,
+        
       })
         .then(function() {
           res.redirect(307, "/api/login");
