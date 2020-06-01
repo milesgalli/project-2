@@ -21,11 +21,11 @@ module.exports = function(sequelize, DataTypes) {
 
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     fullName: { type: DataTypes.STRING },
-    role: { type: DataTypes.BOOLEAN },
+    role: { type: DataTypes.STRING },
     location: { type: DataTypes.STRING },
     technologies: { type: DataTypes.STRING },
     courseGraduated: { type: DataTypes.STRING },
-    employment: { type: DataTypes.BOOLEAN },
+    employment: { type: DataTypes.STRING },
     createdAt: { type: DataTypes.DATE },
     updatedAt: { type: DataTypes.DATE },
     // CompanyId: { type: DataTypes.INTEGER },

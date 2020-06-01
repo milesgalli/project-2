@@ -26,21 +26,45 @@ module.exports = function(app) {
 
   app.post("/api/user/signup", function(req, res) {
     console.log(req.body);
-    db.User.create({
-      email: req.body.email,
-      password: req.body.password,
-      fullName: req.body.fullName,
-      location: req.body.location,
-      technologies: req.body.technologies,
-      courseGraduated: req.body.courseGraduated,
-      employment: req.body.employment,
-    })
-      .then(function() {
-        res.redirect(307, "/api/login");
+    if (req.body.role === "student") {
+      console.log("creating student");
+      db.User.create({
+        email: req.body.email,
+        password: req.body.password,
+        fullName: req.body.fullName,
+        location: req.body.location,
+        role: req.body.role,
+        technologies: req.body.technologies,
+        courseGraduated: req.body.courseGraduated,
+        employment: req.body.employment,
       })
-      .catch(function(err) {
-        res.status(422).json(err);
+        .then(function() {
+          res.redirect(307, "/api/login");
+        })
+        .catch(function(err) {
+          res.status(422).json(err);
+        });
+    } else {
+      db.User.create({
+        email: req.body.email,
+        password: req.body.password,
+        fullName: req.body.fullName,
+        location: req.body.location,
+        role: req.body.role,
       });
+      db.Company.create({
+        companyName: req.body.companyName,
+        numberEmployees: req.body.numberEmployees,
+        industry: req.body.industry,
+        location: req.body.location,
+      })
+        .then(function() {
+          res.redirect(307, "/api/login");
+        })
+        .catch(function(err) {
+          res.status(422).json(err);
+        });
+    }
   });
 
   // redirect company to signup form
