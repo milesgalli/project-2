@@ -1,6 +1,6 @@
 // Requiring path to so we can use relative routes to our HTML files
 var path = require("path");
-const db = require("../models/index.js");
+const db = require("../models");
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
@@ -15,12 +15,23 @@ module.exports = function(app) {
 
   app.get("/dashboard", isAuthenticated, function(req, res) {
     console.log(req.user);
-    res.render("dashboard", req.user);
+    db.User.findOne({
+      where: {
+        id: req.user.id,
+      },
+      include: { model: db.Company },
+    }).then(function(results) {
+      // console.log("db user results here:", { data: results });
+      console.log(results.dataValues);
+      // res.json(results)
+      res.render("dashboard", results.dataValues);
+    });
   });
 
   app.get("/create-hackathon", function(req, res) {});
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
+
   app.get("/members", isAuthenticated, function(req, res) {
     // check user type
     let isCompanyUser = true; // FIX this
