@@ -53,12 +53,12 @@
                     <div class="field-body">
                         <div class="field">
                             <p class="control">
-                                <input class="input" type="text" placeholder="Title">
+                                <input id="inputHackathonTitle" class="input" type="text" placeholder="Title">
                             </p>
                         </div>
                         <div class="field">
                             <p class="control has-icons-right">
-                                <input class="input" type="number" placeholder="Number of students">
+                                <input id="inputNoHackathonStudents" class="input" type="number" placeholder="Number of students">
                             </p>
                         </div>
                     </div>
@@ -67,23 +67,23 @@
                     <div class="field-body">
                         <div class="field">
                             <p class="control">
-                                <input class="input" type="text" placeholder="Start Date">
+                                <input id="inputHackathonStartDate" class="input" type="text" placeholder="Start Date">
                             </p>
                         </div>
                     <div class="field">
                         <p class="control">
-                            <input class="input" type="text" placeholder="Finish Date">
+                            <input id="inputHackathonEndDate" class="input" type="text" placeholder="Finish Date">
                         </p>
                     </div>
                 </div>
             </div>
                 <div class="field">
                     <p class="control">
-                        <textarea class="textarea" placeholder="Discription"></textarea>
+                        <textarea id="inputHackathonDiscription" class="textarea" placeholder="Discription"></textarea>
                     </p>
                 </div>
 
-                <div class="buttons"><button class="button is-primary" href="/">Create Hackathon</button></div>
+                <div id="hackathonSubmit" class="buttons"><button class="button is-primary" href="/">Create Hackathon</button></div>
             </div>
         {{/if}}
         </div>
