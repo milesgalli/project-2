@@ -14,5 +14,15 @@ $("#hackathonSubmit").on('click', function(){
         endDate: endDateInput.val() ? endDateInput.val().trim() : null,
     }
 
-    $.ajax({url: '/api/hackathon', method: "post"})
+    createHackathon(hackathonData)
 })
+
+function createHackathon(hackathonData) {
+    
+    $.ajax({url: '/api/hackathon', method: "post"})
+}
+
+function handleHackathonErr(err) {
+    $("#alert .msg").text(err.responseJSON);
+    $("#alert").fadeIn(500);
+  }
