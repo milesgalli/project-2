@@ -115,10 +115,13 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/api/users/join-hackathon/:hackathonId", function(req, res) {
-    let user = req.user;
-    db.Hackathon.findOne(req.params.hackathonId).then((hackathon) => {
-      user.joinHackaton(hackathon);
+  app.post("/api/users/join-hackathon/:id", function(req, res) {
+    console.log(req.user);
+    db.HackathonUser.create({
+      UserId: req.user.id,
+      HackathonId: req.params.id,
+    }).then(function(hackathon) {
+      res.json(hackathon);
     });
   });
 
@@ -156,7 +159,7 @@ module.exports = function(app) {
   app.delete("/api/hackathons/:id", function(req, res) {
     db.Hackathon.destroy({
       where: {
-        id: req.user.id,
+        id: req.params.id,
       },
     }).then(function(dbHackathon) {
       res.json(dbHackathon);
