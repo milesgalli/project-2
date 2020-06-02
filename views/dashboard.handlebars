@@ -1,4 +1,3 @@
-<!--main contents-->
 <section class="container">
     <div class="tile is-ancestor">
         <div class="tile is-vertical is-12">
@@ -30,10 +29,8 @@
                         {{#if user.role}}
                         <p class="title">Create Hackathon</p>
 
-
                         <div class="field is-horizontal">
                             <div class="field is-small">
-
                             </div>
                             <div class="field-body">
                                 <div class="field">
@@ -72,7 +69,6 @@
                                     placeholder="Description"></textarea>
                             </p>
                         </div>
-
                         <div id="hackathonSubmit" class="buttons"><button class="button is-primary" href="/">Create
                                 Hackathon</button></div>
                         {{/if}}
@@ -91,8 +87,7 @@
                             <p>{{description}}</p>
                             <p>Closing Date: {{endDate}}</p>
 
-
-                            {{#unless user.role}}
+                            {{#unless ../user.role}}
                             <div class="buttons">
                                 <button class="hackathonJoin button is-primary" data-id="{{this.id}}">
                                     Join Hackathon
@@ -100,7 +95,7 @@
                             </div>
                             {{/unless}}
 
-                            {{#if user.role}}
+                            {{#if ../user.role}}
                             <div class="buttons">
                                 <button class="hackathonDelete button is-primary" data-id="{{this.id}}">
                                     Delete Hackathon
@@ -109,16 +104,11 @@
                             {{/if}}
 
                         </div>
-
                         {{/each}}
-
-
-
                     </div>
                 </article>
             </div>
         </div>
-
     </div>
 </section>
 
