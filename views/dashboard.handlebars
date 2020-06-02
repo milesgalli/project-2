@@ -34,8 +34,6 @@
                                 <p># Employees: {{Company.dataValues.numberEmployees}}</p>
                                 <p>Location: {{Company.dataValues.location}}</p>
                             </ul>
-                            <div class="buttons"><button class="button is-primary" href="/">Create Hackathon</button>
-                            </div>
 
                         </div>
                         {{/if}}
@@ -43,11 +41,52 @@
             </div>
             </article>
         </div>
-    </div>
 
     <!--here is the list of the saved hackathon lists-->
-    <div class="column is-8">
+    <div class="column is-7">
+        {{#if role}}
+            <div class="hackathonForm box">
+                <div class="field is-horizontal">
+                    <div class="field is-small">
+                        <label class="label">Create Hackathon</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" type="text" placeholder="Title">
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-right">
+                                <input class="input" type="number" placeholder="Number of students">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" type="text" placeholder="Start Date">
+                            </p>
+                        </div>
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="text" placeholder="Finish Date">
+                        </p>
+                    </div>
+                </div>
+            </div>
+                <div class="field">
+                    <p class="control">
+                        <textarea class="textarea" placeholder="Discription"></textarea>
+                    </p>
+                </div>
 
+                <div class="buttons"><button class="button is-primary" href="/">Create Hackathon</button></div>
+            </div>
+        {{/if}}
+        </div>
     </div>
     </div>
 </section>
