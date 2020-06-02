@@ -1,8 +1,8 @@
-let titleInput = ("#inputHackathonTitle");
-let descriptionInput = ("#inputHackathonDiscription");
-let maxStudent = ("#inputNoHackathonStudents");
-let startDate = ("#inputHackathonStartDate");
-let endDate = ("#inputHackathonEndDate");
+let titleInput = $("#inputHackathonTitle");
+let descriptionInput = $("#inputHackathonDiscription");
+let maxStudent = $("#inputNoHackathonStudents");
+let startDate = $("#inputHackathonStartDate");
+let endDate = $("#inputHackathonEndDate");
 
 $("#hackathonSubmit").on('click', function(){
 
