@@ -1,108 +1,11 @@
 <!--main contents-->
 <section class="container">
-    <div class="columns">
-        <div class="column is-4">
-            <div class="box">
-
-                <!--this is the image of the user-->
-                <article class="media">
-
-
-                    <!--this is the student basic info, from the sign up data-->
-                    <div class="media-content">
-                        <div class="content">
-                            {{#unless role}}
-
-                            <strong>Student Information</strong>
-
-                            <p>Name: {{fullName}}</p>
-                            <p>Email: {{email}}</p>
-                            <p>Technologies: {{technologies}}</p>
-                            <p>Course: {{courseGraduated}}</p>
-                            <p>Looking for work? {{employment}}</p>
-                            <p>Location: {{location}}</p>
-
-                            {{/unless}}
-                        </div>
-                        <div class="content">
-                            {{#if role}}
-
-                            <strong>Company Information</strong>
-
-                            <p>Company Name: {{Company.dataValues.companyName}}</p>
-                            <p>Industry: {{Company.dataValues.industry}}</p>
-                            <p># Employees: {{Company.dataValues.numberEmployees}}</p>
-                            <p>Location: {{Company.dataValues.location}}</p>
-
-
-                        </div>
-                        {{/if}}
-                    </div>
-            </div>
-            </article>
-        </div>
-
-        <div class="column is-8">
-            {{#if role}}
-            <div class="hackathonForm box">
-                <div class="field is-horizontal">
-                    <div class="field is-small">
-                        <label class="label">Create Hackathon</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <p class="control">
-                                <input id="inputHackathonTitle" class="input" type="text" placeholder="Title">
-                            </p>
-                        </div>
-                        <div class="field">
-                            <p class="control has-icons-right">
-                                <input id="inputNoHackathonStudents" class="input" type="number"
-                                    placeholder="Number of students">
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="field is-horizontal">
-                    <div class="field-body">
-                        <div class="field">
-                            <p class="control">
-                                <input id="inputHackathonStartDate" class="input" type="date" placeholder="Start Date"
-                                    value="2018-07-22" min="2018-01-01" max="2018-12-31">
-                            </p>
-                        </div>
-                        <div class="field">
-                            <p class="control">
-                                <input id="inputHackathonEndDate" class="input" type="date" placeholder="Finish Date">
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <p class="control">
-                        <textarea id="inputHackathonDiscription" class="textarea" placeholder="Discription"></textarea>
-                    </p>
-                </div>
-
-                <div id="hackathonSubmit" class="buttons"><button class="button is-primary" href="/">Create
-                        Hackathon</button></div>
-            </div>
-            {{/if}}
-            <!--here is the list of the saved hackathon lists-->
-            <div class="hackathonList">
-
-            </div>
-
-        </div>
-
-    </div>
-
     <div class="tile is-ancestor">
         <div class="tile is-vertical is-12">
             <div class="tile">
                 <div class="tile is-4 is-parent is-vertical">
                     <article class="tile is-child notification is-primary">
-                        {{#unless role}}
+                        {{#unless user.role}}
                         <p class="title">Student Information</p>
                         <p>Name: {{fullName}}</p>
                         <p>Email: {{email}}</p>
@@ -112,7 +15,7 @@
                         <p>Location: {{location}}</p>
                         {{/unless}}
 
-                        {{#if role}}
+                        {{#if user.role}}
                         <p class="title">Company Information</p>
                         <p>Company Name: {{Company.dataValues.companyName}}</p>
                         <p>Industry: {{Company.dataValues.industry}}</p>
@@ -124,7 +27,7 @@
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child notification is-info">
-                        {{#if role}}
+                        {{#if user.role}}
                         <p class="title">Create Hackathon</p>
 
 
@@ -151,14 +54,12 @@
                                 <div class="field">
                                     <p class="control">
                                         <input id="inputHackathonStartDate" class="input" type="date"
-                                            placeholder="Start Date" value="2020-01-01" min="2018-01-01"
-                                            max="2018-12-31">
-                                    </p>
+                                            placeholder="Start Date" value="2020-06-01" </p>
                                 </div>
                                 <div class="field">
                                     <p class="control">
                                         <input id="inputHackathonEndDate" class="input" type="date"
-                                            placeholder="Finish Date">
+                                            placeholder="Finish Date" value="2020-06-30">
                                     </p>
                                 </div>
                             </div>
@@ -181,7 +82,18 @@
                 <article class="tile is-child notification is-danger">
                     <p class="title">Available Hackathons</p>
                     <div class="content">
-                        <!-- Content -->
+
+                        {{#each hackathons}}
+                        <div class="box">
+                            <h3>{{title}}</h3>
+                            <p>{{description}}</p>
+                            <p>Closing Date: {{endDate}}</p>
+                        </div>
+
+                        {{/each}}
+
+
+
                     </div>
                 </article>
             </div>

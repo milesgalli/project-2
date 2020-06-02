@@ -6,7 +6,7 @@ let endDateInput = $("#inputHackathonEndDate");
 
 $("#hackathonSubmit").click(function () {
     if (this.id =="hackathonSubmit") {
-        alert("clicked");
+        location.reload();
     }
 })
 

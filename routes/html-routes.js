@@ -14,17 +14,21 @@ module.exports = function(app) {
   });
 
   app.get("/dashboard", isAuthenticated, function(req, res) {
-    console.log(req.user);
+    // console.log(req.user);
     db.User.findOne({
       where: {
         id: req.user.id,
       },
       include: { model: db.Company },
-    }).then(function(results) {
-      // console.log("db user results here:", { data: results });
-      console.log(results.dataValues);
-      // res.json(results)
-      res.render("dashboard", results.dataValues);
+    }).then(function(userResults) {
+      db.Hackathon.findAll({ raw: true }).then(function(hackathonsResults) {
+        const data = {
+          user: userResults.dataValues,
+          hackathons: hackathonsResults,
+        };
+        console.log(data);
+        res.render("dashboard", data);
+      });
     });
   });
 

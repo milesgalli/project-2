@@ -52,14 +52,13 @@ module.exports = function(app) {
         fullName: req.body.fullName,
         location: req.body.location,
         role: req.body.role,
-        CompanyId: 1
+        CompanyId: 1,
       });
       db.Company.create({
         companyName: req.body.companyName,
         numberEmployees: req.body.numberEmployees,
         industry: req.body.industry,
         location: req.body.location,
-        
       })
         .then(function() {
           res.redirect(307, "/api/login");
@@ -211,19 +210,19 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/api/hackathon/hackathonUser/:HackathonId",function(req, res) {
+  app.get("/api/hackathon/hackathonUser/:HackathonId", function(req, res) {
     db.HackathonUser.findOne({
-      where:{
-        HackathonId: req.user.HackathonId
-      }, 
-    }).then(function() {
-      res.redirect(307, "/api/hackathons");
+      where: {
+        HackathonId: req.user.HackathonId,
+      },
     })
-    .catch(function(err) {
-      res.status(422).json(err);
-    });
+      .then(function() {
+        res.redirect(307, "/api/hackathons");
+      })
+      .catch(function(err) {
+        res.status(422).json(err);
       });
-    
+  });
 
   // need to create one get the hackathon Id
 
