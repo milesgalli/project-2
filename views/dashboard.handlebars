@@ -42,7 +42,6 @@
             </article>
         </div>
 
-    <!--here is the list of the saved hackathon lists-->
     <div class="column is-7">
         {{#if role}}
             <div class="hackathonForm box">
@@ -67,16 +66,17 @@
                     <div class="field-body">
                         <div class="field">
                             <p class="control">
-                                <input id="inputHackathonStartDate" class="input" type="text" placeholder="Start Date">
+                                <input id="inputHackathonStartDate" class="input" type="date" placeholder="Start Date" value="2018-07-22"
+                                min="2018-01-01" max="2018-12-31">
                             </p>
                         </div>
-                    <div class="field">
-                        <p class="control">
-                            <input id="inputHackathonEndDate" class="input" type="text" placeholder="Finish Date">
-                        </p>
+                        <div class="field">
+                            <p class="control">
+                                <input id="inputHackathonEndDate" class="input" type="date" placeholder="Finish Date">
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="field">
                     <p class="control">
                         <textarea id="inputHackathonDiscription" class="textarea" placeholder="Discription"></textarea>
@@ -85,8 +85,16 @@
 
                 <div id="hackathonSubmit" class="buttons"><button class="button is-primary" href="/">Create Hackathon</button></div>
             </div>
-        {{/if}}
+            {{/if}}
+            <!--here is the list of the saved hackathon lists-->
+            <div class="hackathonList">
+
+            </div>
+
         </div>
     </div>
     </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/create-hackathon.js"></script>
