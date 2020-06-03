@@ -1,41 +1,31 @@
-'use strict';
-const faker = require('faker');
-const se
+"use strict";
+const faker = require("faker");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+    let industry = ["Tech", "Agriculture", "HR", "Medical supplies", "Dentistry"]
+    
+    let generateUser = function() {
+      return {
+        companyName:faker.company.companyName(),
+        numberEmployees:faker.random.number(),
+        industry: industry[Math.floor(Math.random() * industry.length)],
+        location: faker.address.city(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
 
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+      };
+    };
+    let payload = [];
 
-   return queryInterface.bulkInsert('Companys', [{
-    companyName: 'Facebook', 
-    numberEmployees: "50",
-    password: 'secret',
-    industry: "Technology",
-    location: "West Perth", 
-    startDate: new Date(), 
-    createdAt: new Date(), 
-    updatedAt: new Date(), 
-
-  }], {});
+    for (let index = 0; index < 100; index++) {
+      payload.push(generateUser());
+    }
+    return queryInterface.bulkInsert("Companies", payload);
   },
-  
-  
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
+    return queryInterface.bulkDelete("Companies", null, {});
+  },
 };
+

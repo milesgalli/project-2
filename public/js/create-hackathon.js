@@ -24,6 +24,7 @@ $("#hackathonSubmit").click(function() {
 });
 
 function createHackathon(hackathonData) {
+
   $.ajax({
     url: "/api/hackathons",
     method: "post",
@@ -31,6 +32,7 @@ function createHackathon(hackathonData) {
   })
     .then(function(hackathonData) {})
     .catch(handleHackathonErr);
+
 }
 
 function handleHackathonErr(err) {

@@ -61,7 +61,7 @@ module.exports = function(app) {
         location: req.body.location,
       })
         .then(function() {
-          res.redirect(307, "/api/login");
+          res.redirect(307,"/api/login");
         })
         .catch(function(err) {
           res.status(422).json(err);
@@ -186,7 +186,7 @@ module.exports = function(app) {
 
   app.post("/api/hackathon/hackathonUser", function(req, res) {
     db.HackathonUser.create({
-      UserId: req.user,
+      UserId: req.user.id,
       HackathonId: req.body.HackathonId,
     })
       .then(function() {
