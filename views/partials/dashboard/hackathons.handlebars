@@ -1,0 +1,30 @@
+                <article class="tile is-child notification is-danger">
+                    <p class="title">Available Hackathons</p>
+                    <div class="content">
+
+                        {{#each hackathons}}
+                        <div class="box">
+                            <h3>{{title}} - Currently looking for {{maxStudent}} students</h3>
+                            <p>{{description}}</p>
+                            <p>Closing Date: {{endDate}}</p>
+
+                            {{#unless ../user.role}}
+                            <div class="buttons">
+                                <button class="hackathonJoin button is-primary" data-id="{{this.id}}">
+                                    Join Hackathon
+                                </button>
+                            </div>
+                            {{/unless}}
+
+                            {{#if ../user.role}}
+                            <div class="buttons">
+                                <button class="hackathonDelete button is-primary" data-id="{{this.id}}">
+                                    Delete Hackathon
+                                </button>
+                            </div>
+                            {{/if}}
+
+                        </div>
+                        {{/each}}
+                    </div>
+                </article>

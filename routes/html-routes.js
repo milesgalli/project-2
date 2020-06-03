@@ -24,6 +24,7 @@ module.exports = function(app) {
       db.Hackathon.findAll({ raw: true }).then(function(hackathonsResults) {
         const data = {
           user: userResults.dataValues,
+          
           hackathons: hackathonsResults,
         };
         console.log(data);
