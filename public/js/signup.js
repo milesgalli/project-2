@@ -51,6 +51,7 @@ $(document).ready(function() {
   // Otherwise we log any errors
   function signUpUser(userData) {
     // console.log(userData);
+    
     $.post("/api/user/signup", userData)
       .then(function(data) {  
         window.location.replace("/dashboard");

@@ -14,17 +14,42 @@ module.exports = function(app) {
   });
 
   app.get("/dashboard", isAuthenticated, function(req, res) {
-    console.log(req.user);
+    // console.log(req.user);
+    // retrieves user info from database
     db.User.findOne({
       where: {
         id: req.user.id,
       },
       include: { model: db.Company },
-    }).then(function(results) {
-      // console.log("db user results here:", { data: results });
-      console.log(results.dataValues);
-      // res.json(results)
-      res.render("dashboard", results.dataValues);
+    }).then(function(userResults) {
+      // retrieves all hackathons from database
+      db.Hackathon.findAll({ raw: true }).then(function(hackathonsResults) {
+        // retrieves all hackathons a student is attending from database
+        db.Hackathon.findAll({
+          include: {
+            model: db.User,
+            where: {
+              id: req.user.id,
+            },
+          },
+        }).then(function(attendingHackathons) {
+          // retrieves all hackathons a company user has created from database
+          db.Hackathon.findAll({
+            where: {
+              CompanyId: req.user.CompanyId,
+            },
+          }).then(function(createdHackathons) {
+            const data = {
+              user: userResults.dataValues,
+              hackathons: hackathonsResults,
+              attending: attendingHackathons,
+              created: createdHackathons,
+            };
+            console.log(data);
+            res.render("dashboard", data);
+          });
+        });
+      });
     });
   });
 
