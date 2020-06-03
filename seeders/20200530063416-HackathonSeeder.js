@@ -1,34 +1,38 @@
-'use strict';
-
-const faker = require('faker');
+"use strict";
+const faker = require("faker");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-   
-
-   return queryInterface.bulkInsert('Hackathons', [{
-    title: 'Inventory Management issue', 
-    description: "Keep loosing track of incoming and items in the warehouse",
-    password: 'secret',
-    maxStudent: 10,
-    location: "attadale", 
-    startDate: new Date(), 
-    endDate: 2020-06-20, 
-    createdAt: new Date(), 
-    updatedAt: new Date(), 
-
-  }], {});
 
   
+    let generateUser = function() {
+      return {
+        title: faker.name.title(),
+        description: faker.lorem.words(),
+        maxStudent:faker.random.number(), 
+        startDate:new Date(),
+        endDate: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+    };
+  //   title: { type: DataTypes.STRING },
+  //   description: { type: DataTypes.STRING },
+  //   maxStudent: { type: DataTypes.INTEGER },
+  //   startDate: { type: DataTypes.DATE },
+  //   endDate: { type: DataTypes.DATE },
+  //   createdAt: { type: DataTypes.DATE },
+  //   updatedAt: { type: DataTypes.DATE },
+  // });
+    let payload = [];
+
+    for (let index = 0; index < 100; index++) {
+      payload.push(generateUser());
+    }
+    return queryInterface.bulkInsert("Hackathons", payload);
   },
-
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
+    return queryInterface.bulkDelete("Hackathons", null, {});
+  },
 };
