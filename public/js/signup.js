@@ -9,14 +9,13 @@ $(document).ready(function() {
   let courseInput = $("input#course-input");
   let technologyInput = $("input#technology-input");
 
-  // let companyInput = $("input#companyInput");
   let companyNameInput = $("input#companyName-input");
   let industryInput = $("input#industry-input");
   let maxEmployeesInput = $("input#maxEmployees-input");
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
-    let roleInput = $("input[name='role-answer']:checked");
+    let roleInput = $("input[name='roleAnswer']:checked");
     let employmentInput = $("input[name=employmentanswer]:checked");
     //states.counter = 0;
     event.preventDefault();
@@ -43,7 +42,7 @@ $(document).ready(function() {
       return;
     }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData);
+    signUpUser(userData)
     emailInput.val("");
     passwordInput.val("");
   });
@@ -53,7 +52,7 @@ $(document).ready(function() {
   function signUpUser(userData) {
     // console.log(userData);
     $.post("/api/user/signup", userData)
-      .then(function(data) {
+      .then(function(data) {  
         window.location.replace("/dashboard");
       // If there's an error, handle it by throwing up a bootstrap alert
       })
@@ -65,28 +64,69 @@ $(document).ready(function() {
     $("#alert").fadeIn(500);
   }
 
-  const questions = $(".questionsAppend");
-
   let states = {
-    counter: 0,
-    inputData: {
-      email: "1",
-      password: "null",
-      user_type: "null",
-    }, // student / company
+    counter: 0
   };
+
+  function nextStep() {
+    states.counter++;
+    document.getElementById('next-hidden').click();
+  }
 
   //when next is clicked add 1 to state
   //when previous is clicked -1 to state
-  $("#next").click(function add() {
-    if (states.counter < 4) {
-      states.counter++;
+  $("#next").click(function(event) {
+
+    event.preventDefault();
+
+    let isStudent = $("#studentInput").prop("checked");
+    let isCompany = $("#companyInput").prop("checked");
+
+    let userHasNotSelectedAnOption = (isStudent === false && isCompany === false);
+
+    if(states.counter === 0 && userHasNotSelectedAnOption){
+      alert("choose something");
+      return;
     }
 
-    if (states.counter === 2) {
-      // we are currently in social page
-      renderUserTypeOnSignup();
+    let emptyEmailInput = $("input#email-input").val() === "";
+    let emptyPasswordInput = $("input#password-input").val() === "";
+    let emptyLocationInput = $("input#location-input").val() === "";
+
+    emptyProfileQuestions = (emptyEmailInput || emptyPasswordInput || emptyLocationInput);
+
+    if (states.counter === 1 && emptyProfileQuestions) {
+      alert("cant have empty fields");
+      return;
     }
+
+      // we are currently in social page
+    renderUserTypeOnSignup();
+
+
+    let emptyStudentNameInput = $("input#fullName-input").val() === "";
+    let emptyCourseInput = $("input#course-input").val() === "";
+    let emptyTechnologyInput = $("input#technology-input").val() === "";
+
+    emptyStudentQuestions = (emptyStudentNameInput || emptyCourseInput || emptyTechnologyInput);
+
+    if (states.counter === 2 && isStudent && emptyStudentQuestions) {
+      alert("cant be empty");
+      return;
+    }
+
+    let emptyCompanyNameInput = $("input#companyName-input").val() === "";
+    let emptyIndustryInput = $("input#industry-input").val() === "";
+    let emptyMaxEmployeesInput = $("input#maxEmployees-input").val() === "";
+
+    let emptyCompanyQuestions = (emptyCompanyNameInput || emptyIndustryInput || emptyMaxEmployeesInput);
+
+    if (states.counter === 2 && isCompany && emptyCompanyQuestions) {
+      alert("cant be empty");
+      return;
+    }
+
+    nextStep();
 
     if (states.counter === 3) {
       //hide next btn on last step, create submit
@@ -95,14 +135,13 @@ $(document).ready(function() {
     }
   });
 
-  $("#previous").click(function add() {
+  $("#previous").click(function() {
     if (states.counter >= 1) {
       states.counter--;
     }
-
     //next is displayed when going back
     $("#next").show();
-    $("#submitAppend").css("display", "none");
+    $("#submitAppend").addClass("hidden");
   });
 
   function renderUserTypeOnSignup() {
@@ -119,4 +158,26 @@ $(document).ready(function() {
       $(".student-questions").addClass("hidden");
     }
   }
+
+  
+  function appendError() {
+
+    $("#appendValidateResult").empty();
+
+    let errorHtml = $("<h1>").html("Please fill make sure all fields are filled");
+
+    $("#appendValidateResult").append(errorHtml);
+
+  }
+
+  function appendSuccess() {
+
+    $("#appendValidateResult").empty();
+
+    let successHtml = $("<h1>").html("Your account has been created! Click the Sign Up button");
+
+    $("#appendValidateResult").append(successHtml);
+  }
 });
+
+
