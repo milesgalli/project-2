@@ -1,28 +1,65 @@
 let titleInput = $("#inputHackathonTitle");
 let descriptionInput = $("#inputHackathonDiscription");
-let maxStudent = $("#inputNoHackathonStudents");
-let startDate = $("#inputHackathonStartDate");
-let endDate = $("#inputHackathonEndDate");
+let maxStudentInput = $("#inputNoHackathonStudents");
+let startDateInput = $("#inputHackathonStartDate");
+let endDateInput = $("#inputHackathonEndDate");
 
-$("#hackathonSubmit").on('click', function(){
+$("#hackathonSubmit").click(function() {
+  if (this.id == "hackathonSubmit") {
+    location.reload();
+  }
+});
 
-    let hackathonData = {
-        title: titleInput.val() ? titleInput.val().trim() : null,
-        description: descriptionInput ? descriptionInput.val().trim() : null,
-        maxStudent: maxStudentInput.val() ? maxStudentInput.val().trim() : null,
-        startDate: startDateNameInput.val() ? startDateNameInput.val().trim() : null,
-        endDate: endDateInput.val() ? endDateInput.val().trim() : null,
-    }
-
-    createHackathon(hackathonData)
-})
+$("#hackathonSubmit").click(function() {
+  let hackathonData = {
+    title: titleInput.val() ? titleInput.val().trim() : null,
+    description: descriptionInput ? descriptionInput.val().trim() : null,
+    maxStudent: maxStudentInput.val() ? maxStudentInput.val().trim() : null,
+    startDate: startDateInput.val() ? startDateInput.val().trim() : null,
+    endDate: endDateInput.val() ? endDateInput.val().trim() : null,
+  };
+  console.log(hackathonData);
+  console.log(JSON.stringify(hackathonData));
+  createHackathon(hackathonData);
+});
 
 function createHackathon(hackathonData) {
-    
-    $.ajax({url: '/api/hackathons', method: "post"})
+
+  $.ajax({
+    url: "/api/hackathons",
+    method: "post",
+    data: hackathonData,
+  })
+    .then(function(hackathonData) {})
+    .catch(handleHackathonErr);
+
 }
 
 function handleHackathonErr(err) {
-    $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
-  }
+  $("#alert .msg").text(err.responseJSON);
+  $("#alert").fadeIn(500);
+}
+
+$(".hackathonDelete").on("click", function(event) {
+  var id = $(this).data("id");
+  // Send the DELETE request.
+  $.ajax("/api/hackathons/" + id, {
+    type: "DELETE",
+  }).then(function() {
+    console.log("deleted hackathon ", id);
+    // Reload the page to get the updated list
+    location.reload();
+  });
+});
+
+$(".hackathonJoin").on("click", function(event) {
+    var id = $(this).data("id");
+    // Send the POST request.
+    $.ajax("/api/users/join-hackathon/" + id, {
+      type: "POST",
+    }).then(function() {
+      console.log("joined hackathon ", id);
+      // Reload the page to get the updated list
+      location.reload();
+    });
+  });

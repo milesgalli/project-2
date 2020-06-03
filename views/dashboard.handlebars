@@ -1,92 +1,16 @@
-<!--main contents-->
 <section class="container">
-    <div class="columns">
-        <div class="column is-5">
-            <div class="box">
-
-                <!--this is the image of the user-->
-                <article class="media">
-
-
-                    <!--this is the student basic info, from the sign up data-->
-                    <div class="media-content">
-                        <div class="content">
-                            {{#unless role}}
-
-                            <strong>Student Information</strong>
-                            <ul>
-                                <p>Name: {{fullName}}</p>
-                                <p>Email: {{email}}</p>
-                                <p>Technologies: {{technologies}}</p>
-                                <p>Course: {{courseGraduated}}</p>
-                                <p>Looking for work? {{employment}}</p>
-                                <p>Location: {{location}}</p>
-                            </ul>
-                            {{/unless}}
-                        </div>
-                        <div class="content">
-                            {{#if role}}
-
-                            <strong>Company Information</strong>
-                            <ul>
-                                <p>Company Name: {{Company.dataValues.companyName}}</p>
-                                <p>Industry: {{Company.dataValues.industry}}</p>
-                                <p># Employees: {{Company.dataValues.numberEmployees}}</p>
-                                <p>Location: {{Company.dataValues.location}}</p>
-                            </ul>
-
-                        </div>
-                        {{/if}}
-                    </div>
+    <div class="tile is-ancestor">
+        <div class="tile is-vertical is-12">
+            <div class="tile">
+                {{>dashboard/user-info}}
+                {{>dashboard/create-and-attending-hackathons}}
             </div>
-            </article>
+            <div class="tile is-parent">
+                {{>dashboard/hackathons}}
+            </div>
         </div>
-
-    <!--here is the list of the saved hackathon lists-->
-    <div class="column is-7">
-        {{#if role}}
-            <div class="hackathonForm box">
-                <div class="field is-horizontal">
-                    <div class="field is-small">
-                        <label class="label">Create Hackathon</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <p class="control">
-                                <input id="inputHackathonTitle" class="input" type="text" placeholder="Title">
-                            </p>
-                        </div>
-                        <div class="field">
-                            <p class="control has-icons-right">
-                                <input id="inputNoHackathonStudents" class="input" type="number" placeholder="Number of students">
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="field is-horizontal">
-                    <div class="field-body">
-                        <div class="field">
-                            <p class="control">
-                                <input id="inputHackathonStartDate" class="input" type="text" placeholder="Start Date">
-                            </p>
-                        </div>
-                    <div class="field">
-                        <p class="control">
-                            <input id="inputHackathonEndDate" class="input" type="text" placeholder="Finish Date">
-                        </p>
-                    </div>
-                </div>
-            </div>
-                <div class="field">
-                    <p class="control">
-                        <textarea id="inputHackathonDiscription" class="textarea" placeholder="Discription"></textarea>
-                    </p>
-                </div>
-
-                <div id="hackathonSubmit" class="buttons"><button class="button is-primary" href="/">Create Hackathon</button></div>
-            </div>
-        {{/if}}
-        </div>
-    </div>
     </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/create-hackathon.js"></script>
