@@ -19,7 +19,7 @@ $("#hackathonSubmit").on('click', function(){
 
 function createHackathon(hackathonData) {
     
-    $.ajax({url: '/api/hackathon', method: "post"})
+    $.ajax({url: '/api/hackathons', method: "post"})
 }
 
 function handleHackathonErr(err) {
