@@ -14,71 +14,65 @@ module.exports = function(app) {
   });
 
   app.get("/dashboard", isAuthenticated, function(req, res) {
-    // console.log(req.user);
     // retrieves user info from database
-    db.User.findOne({
+    const user = db.User.findOne({
       where: {
         id: req.user.id,
       },
       include: { model: db.Company },
-    }).then(function(userResults) {
-      // retrieves all hackathons from database
-      db.Hackathon.findAll({ raw: true }).then(function(hackathonsResults) {
-        // retrieves all hackathons a student is attending from database
-        db.Hackathon.findAll({
-          include: {
-            model: db.User,
-            where: {
-              id: req.user.id,
-            },
-          },
-        }).then(function(attendingHackathons) {
-          // retrieves all hackathons a company user has created from database
-          db.Hackathon.findAll({
-            where: {
-              CompanyId: req.user.CompanyId,
-            },
-          }).then(function(createdHackathons) {
-            const data = {
-              user: userResults.dataValues,
-              hackathons: hackathonsResults,
-              attending: attendingHackathons,
-              created: createdHackathons,
-            };
-            console.log(data);
-            res.render("dashboard", data);
-          });
-        });
-      });
     });
-  });
+    // retrieves all hackathons from database
+    const hackathons = db.Hackathon.findAll({
+      raw: true,
+      include: {
+        model: db.Company,
+      },
+    });
 
-  app.get("/create-hackathon", function(req, res) {});
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
+    // retrieves all hackathons a student is attending from database
+    const attending = db.Hackathon.findAll({
+      include: {
+        model: db.User,
+        where: {
+          id: req.user.id,
+        },
+      },
+    });
+    // retrieves all hackathons a company user has created from database
+    const created = db.Hackathon.findAll({
+      where: {
+        CompanyId: req.user.CompanyId,
+      },
+    });
+    // retrieves users associated to a hackathon
+    const user_in_hackathons = db.Hackathon.findAll({
+      where: {
+        CompanyId: req.user.CompanyId,
+      },
+      include: {
+        model: db.User,
+      },
+    });
 
-  app.get("/members", isAuthenticated, function(req, res) {
-    // check user type
-    let isCompanyUser = true; // FIX this
-
-    // if company user redirect to company profile pg
-    if (isCompanyUser) {
-      // TODO: fetch hackathonds data from db
-
-      //  TODO: fetch company data from db
-      res.render("company-dashboard", {
-        hackathons: [],
-        company: {},
-      });
-    } else {
-      res.render("student.-dashboard", {});
-    }
-
-    // if student user redirect to student profile page
-
-    // render
-    res.render();
-
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+    Promise.all([
+      user,
+      hackathons,
+      attending,
+      created,
+      user_in_hackathons,
+    ]).then((responses) => {
+      // console.log(responses[4]);
+      // res.json(responses[1]);
+      // return;
+      const data = {
+        user: responses[0].dataValues,
+        hackathons: responses[1],
+        attending: responses[2],
+        created: responses[3],
+        usersAttendingHackathons: responses[4],
+      };
+      // console.log(responses[4]);
+      res.render("dashboard", data);
+    });
   });
 };

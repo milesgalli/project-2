@@ -6,7 +6,7 @@
         {{#each hackathons}}
         <div class="box">
 
-            <h3>{{title}} - Currently looking for {{maxStudent}} students</h3>
+            <h3>{{[Company.companyName]}}: {{title}} - Currently looking for {{maxStudent}} students</h3>
             <p>{{description}}</p>
             <p>Opening Date: {{startDate}}</p>
             <p>Closing Date: {{endDate}}</p>
@@ -37,9 +37,22 @@
                 </button>
             </div>
         </div>
+
+
+
+        {{/each}}
+        <p class="title">Students attending your Hackathons</p>
+        {{#each usersAttendingHackathons}}
+        <p class="subtitle is-5">{{dataValues.title}}</p>
+        {{#each dataValues.Users}}
+        <ul>
+            <li>{{dataValues.fullName}}</li>
+        </ul>
+        {{/each}}
+        {{/each}}
+        {{#each studentCount}}
+        {{dataValues}}
         {{/each}}
     </div>
     {{/if}}
-
-
 </article>
