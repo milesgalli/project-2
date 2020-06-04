@@ -26,7 +26,7 @@
                 <div class="field">
                     <p class="control">
                         <label>Title</label>
-                        <input id="inputHackathonTitle" class="input" type="text">
+                        <input id="inputHackathonTitle" class="input" type="text" placeholder="What is the task?">
                     </p>
                 </div>
                 <div class="field">
@@ -43,20 +43,21 @@
                     <p class="control">
                         <label>Start Date</label>
                         <input id="inputHackathonStartDate" class="input" type="date" placeholder="Start Date"
-                            min="2020-06-01" </p>
+                            min="2020-06-01" value="2020-06-06"></p>
                 </div>
                 <div class="field">
                     <p class="control">
                         <label>End Date</label>
                         <input id="inputHackathonEndDate" class="input" type="date" placeholder="Finish Date"
-                            min="2020-06-01">
+                            min="2020-06-01" value="2020-06-30"></p>
                     </p>
                 </div>
             </div>
         </div>
         <div class="field">
             <p class="control">
-                <textarea id="inputHackathonDiscription" class="textarea" placeholder="Description"></textarea>
+                <label>Description</label>
+                <textarea id="inputHackathonDiscription" class="textarea" placeholder="Add all details for your Hackathon"></textarea>
             </p>
         </div>
         <div id="hackathonSubmit" class="buttons"><button class="button is-primary" href="/">Create
