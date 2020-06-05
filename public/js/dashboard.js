@@ -39,27 +39,28 @@ function createHackathon(hackathonData) {
 
 $(".hackathonDelete").on("click", function(event) {
   var id = $(this).data("id");
-  Swal.fire({
+  swal({
     title: "Are you sure?",
-    text: "This Hackathon will be gone forever!",
+    text: "Once deleted, you will not be able to recover this Hackathon!",
     icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.value) {
-      // Swal.fire("Deleted!", "This Hackathon has been deleted.", "success");
+    buttons: true,
+    dangerMode: true,
+  }).then(function(result) {
+    if (result === true) {
       $.ajax("/api/hackathons/" + id, {
         type: "DELETE",
-      }).then(function() {
-        console.log("deleted hackathon ", id);
-        // Reload the page to get the updated list
+        success: function () {
+          swal("Your Hackathon has been deleted!", {
+            icon: "success",
+        }),
         location.reload();
-      });
-    }
-  });
-});
+        }
+      })
+    } if (result === null) {
+        swal("Your Hackathon is safe!");      
+      }
+  })
+})
 
 $(".hackathonJoin").on("click", function(event) {
   var id = $(this).data("id");
