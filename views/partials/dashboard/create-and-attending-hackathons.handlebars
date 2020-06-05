@@ -1,17 +1,15 @@
-
-
 <div class="tile is-parent">
-                    <article class="tile is-child notification create-hackathon">
-                        {{#if user.role}}
-                        <div class="media">
-                             <figure class="media-left image is-64x64">
-                                 <img src="asset/new-post.svg">
-                            </figure>
-                            <div class="media-content">
-                               <p class="title">Create Hackathon</p>  
-                            </div>
-                        </div>
-        
+    <article class="tile is-child notification create-hackathon">
+        {{#if user.role}}
+        <div class="media">
+            <figure class="media-left image is-64x64">
+                <img src="asset/new-post.svg">
+            </figure>
+            <div class="media-content">
+                <p class="title">Create Hackathon</p>
+            </div>
+        </div>
+
         <div class="field is-horizontal">
             <div class="field is-small">
             </div>
@@ -47,32 +45,45 @@
                 </div>
             </div>
         </div>
+
         <div class="field">
             <p class="control">
                 <label>Description</label>
-                <textarea id="inputHackathonDiscription" class="textarea" placeholder="Add all details for your Hackathon"></textarea>
+                <textarea id="inputHackathonDiscription" class="textarea"
+                    placeholder="Add all details for your Hackathon"></textarea>
             </p>
         </div>
-        <div id="hackathonSubmit" class="buttons"><button class="button is-primary" href="/">Create
-                Hackathon</button></div>
+        <div id="hackathonSubmit" class="buttons"><button class="button" href="/">Create
+                Hackathon</button>
+
+        </div>
+
+
         {{/if}}
-        <div class="tile is-parent">
-    <article class="tile is-child notification is-info">
+
 
         {{#unless user.role}}
-        <p class="title">Hackathon's I've signed up to</p>
-        {{#each attending}}
-        <div class="box">
-            <h3>{{dataValues.title}} - Currently looking for {{dataValues.maxStudent}} students</h3>
-            <p>{{dataValues.description}}</p>
-            <p>Closing Date: {{prettifyDate dataValues.endDate "DD-MM-YYYY"}}</p>
-            <div class="buttons">
-                <button class="hackathonUnjoin button is-primary" data-id="{{dataValues.id}}">
-                    Unjoin Hackathon
-                </button>
-            </div>
+        <div class="tile is-parent">
+            <article class="tile is-child notification">
+
+
+                <p class="title">Hackathon's I've signed up to</p>
+                {{#each attending}}
+                <div class="box">
+                    <h3>{{dataValues.title}} - Currently looking for {{dataValues.maxStudent}} students</h3>
+                    <p>{{dataValues.description}}</p>
+                    <p>Closing Date: {{prettifyDate dataValues.endDate "DD-MM-YYYY"}}</p>
+                    <div class="buttons">
+                        <button class="hackathonUnjoin button is-primary" data-id="{{dataValues.id}}">
+                            Unjoin Hackathon
+                        </button>
+                    </div>
+                </div>
+                {{/each}}
+
+
+            </article>
         </div>
-        {{/each}}
         {{/unless}}
 
     </article>

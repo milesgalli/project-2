@@ -1,64 +1,62 @@
+<article class="tile is-child notification hackathons">
+    <div class="media">
+        <figure class="media-left image is-64x64">
+            <img src="asset/discussion.svg">
+        </figure>
+        <div class="media-content">
+            {{#unless user.role}}
+            <p class="title">Available Hackathons</p>
+            <div class="content">
+                {{#each hackathons}}
+                <div class="box">
 
- <article class="tile is-child notification hackathons">
-                   <div class="media">
-                        <figure class="media-left image is-64x64">
-                                <img src="asset/discussion.svg">
-                        </figure>
-                        <div class="media-content">
-    {{#unless user.role}}
-    <p class="title">Available Hackathons</p>
-    <div class="content">
-        {{#each hackathons}}
-        <div class="box">
+                    <h3>{{[Company.companyName]}}: {{title}} - Currently looking for {{maxStudent}} students</h3>
+                    <p>{{description}}</p>
+                    <p>Opening Date: {{prettifyDate startDate "DD-MM-YYYY"}}</p>
+                    <p>Closing Date: {{prettifyDate endDate "DD-MM-YYYY"}}</p>
 
-            <h3>{{[Company.companyName]}}: {{title}} - Currently looking for {{maxStudent}} students</h3>
-            <p>{{description}}</p>
-            <p>Opening Date: {{prettifyDate startDate "DD-MM-YYYY"}}</p>
-            <p>Closing Date: {{prettifyDate endDate "DD-MM-YYYY"}}</p>
+                    <div class="buttons">
+                        <button class="hackathonJoin button is-primary" data-id="{{this.id}}">
+                            Join Hackathon
+                        </button>
+                    </div>
+                </div>
 
-            <div class="buttons">
-                <button class="hackathonJoin button is-primary" data-id="{{this.id}}">
-                    Join Hackathon
-                </button>
+                {{/each}}
             </div>
-        </div>
+            {{/unless}}
 
-        {{/each}}
-    </div>
-    {{/unless}}
+            {{#if user.role}}
+            <p class="title">Hackathons current for our Company</p>
+            <div class="content">
+                {{#each created}}
+                <div class="box">
+                    <h3>{{dataValues.title}} - Currently looking for {{dataValues.maxStudent}} students</h3>
+                    <p>{{dataValues.description}}</p>
+                    <p>Opening Date: {{prettifyDate dataValues.startDate "DD-MM-YYYY"}}</p>
+                    <p>Closing Date: {{prettifyDate dataValues.endDate "DD-MM-YYYY"}}</p>
+                    <div class="buttons">
+                        <button class="hackathonDelete button is-primary" data-id="{{dataValues.id}}">
+                            Delete Hackathon
+                        </button>
+                    </div>
+                </div>
 
-    {{#if user.role}}
-    <p class="title">Hackathons current for our Company</p>
-    <div class="content">
-        {{#each created}}
-        <div class="box">
-            <h3>{{dataValues.title}} - Currently looking for {{dataValues.maxStudent}} students</h3>
-            <p>{{dataValues.description}}</p>
-            <p>Opening Date: {{prettifyDate dataValues.startDate "DD-MM-YYYY"}}</p>
-            <p>Closing Date: {{prettifyDate dataValues.endDate "DD-MM-YYYY"}}</p>
-            <div class="buttons">
-                <button class="hackathonDelete button is-primary" data-id="{{dataValues.id}}">
-                    Delete Hackathon
-                </button>
+
+
+                {{/each}}
+                <p class="title">Students attending your Hackathons</p>
+                {{#each usersAttendingHackathons}}
+                <p class="subtitle is-5">{{dataValues.title}}</p>
+                {{#each dataValues.Users}}
+                <ul>
+                    <li>{{dataValues.fullName}}</li>
+                </ul>
+                {{/each}}
+                {{/each}}
+                {{#each studentCount}}
+                {{dataValues}}
+                {{/each}}
             </div>
-        </div>
-
-
-
-        {{/each}}
-        <p class="title">Students attending your Hackathons</p>
-        {{#each usersAttendingHackathons}}
-        <p class="subtitle is-5">{{dataValues.title}}</p>
-        {{#each dataValues.Users}}
-        <ul>
-            <li>{{dataValues.fullName}}</li>
-        </ul>
-        {{/each}}
-        {{/each}}
-        {{#each studentCount}}
-        {{dataValues}}
-        {{/each}}
-    </div>
-    {{/if}}
+            {{/if}}
 </article>
-
