@@ -44,17 +44,28 @@ function handleHackathonErr(err) {
 
 $(".hackathonDelete").on("click", function(event) {
   var id = $(this).data("id");
-  if (confirm("Are you sure you want to delete this Hackathon?")) {
-    // Send the DELETE request.
-    $.ajax("/api/hackathons/" + id, {
-      type: "DELETE",
-    }).then(function() {
-      console.log("deleted hackathon ", id);
-      // Reload the page to get the updated list
-      location.reload();
-    });
-  }
-});
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this Hackathon!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then(function(result) {
+    if (result === true) {
+      $.ajax("/api/hackathons/" + id, {
+        type: "DELETE",
+        success: function () {
+          swal("Your Hackathon has been deleted!", {
+            icon: "success",
+        }),
+        location.reload();
+        }
+      })
+    } if (result === null) {
+        swal("Your Hackathon is safe!");      
+      }
+  })
+})
 
 $(".hackathonJoin").on("click", function(event) {
   var id = $(this).data("id");

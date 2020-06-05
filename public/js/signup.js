@@ -86,7 +86,7 @@ $(document).ready(function() {
     let userHasNotSelectedAnOption = (isStudent === false && isCompany === false);
 
     if(states.counter === 0 && userHasNotSelectedAnOption){
-      alert("choose something");
+      swal("Please choose a role before continuing");
       return;
     }
 
@@ -97,11 +97,10 @@ $(document).ready(function() {
     emptyProfileQuestions = (emptyEmailInput || emptyPasswordInput || emptyLocationInput);
 
     if (states.counter === 1 && emptyProfileQuestions) {
-      alert("cant have empty fields");
+      swal("Please fill in all the fields");
       return;
     }
 
-      // we are currently in social page
     renderUserTypeOnSignup();
 
 
@@ -112,7 +111,7 @@ $(document).ready(function() {
     emptyStudentQuestions = (emptyStudentNameInput || emptyCourseInput || emptyTechnologyInput);
 
     if (states.counter === 2 && isStudent && emptyStudentQuestions) {
-      alert("cant be empty");
+      swal("Please fill in all the fields");
       return;
     }
 
@@ -123,7 +122,7 @@ $(document).ready(function() {
     let emptyCompanyQuestions = (emptyCompanyNameInput || emptyIndustryInput || emptyMaxEmployeesInput);
 
     if (states.counter === 2 && isCompany && emptyCompanyQuestions) {
-      alert("cant be empty");
+      swal("Please fill in all the fields");
       return;
     }
 
