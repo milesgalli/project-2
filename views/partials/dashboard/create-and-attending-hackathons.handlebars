@@ -7,7 +7,7 @@
         <div class="box">
             <h3>{{dataValues.title}} - Currently looking for {{dataValues.maxStudent}} students</h3>
             <p>{{dataValues.description}}</p>
-            <p>Closing Date: {{dataValues.endDate}}</p>
+            <p>Closing Date: {{prettifyDate dataValues.endDate "DD-MM-YYYY"}}</p>
             <div class="buttons">
                 <button class="hackathonUnjoin button is-primary" data-id="{{dataValues.id}}">
                     Unjoin Hackathon
