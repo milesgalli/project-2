@@ -1,5 +1,14 @@
-                <article class="tile is-child notification is-danger">
-                    <p class="title">Available Hackathons</p>
+                <article class="tile is-child notification hackathons">
+                   <div class="media">
+                        <figure class="media-left image is-64x64">
+                                <img src="asset/discussion.svg">
+                        </figure>
+                        <div class="media-content">
+                            
+                                <p class="title ">Available Hackathons</p>
+                           
+                        </div>
+                    </div>
                     <div class="content">
 
                         {{#each hackathons}}
@@ -10,7 +19,7 @@
 
                             {{#unless ../user.role}}
                             <div class="buttons">
-                                <button class="hackathonJoin button is-primary" data-id="{{this.id}}">
+                                <button class="hackathonJoin button " data-id="{{this.id}}">
                                     Join Hackathon
                                 </button>
                             </div>
@@ -18,7 +27,7 @@
 
                             {{#if ../user.role}}
                             <div class="buttons">
-                                <button class="hackathonDelete button is-primary" data-id="{{this.id}}">
+                                <button class="hackathonDelete button " data-id="{{this.id}}">
                                     Delete Hackathon
                                 </button>
                             </div>
