@@ -9,19 +9,16 @@
             <div class="content">
                 {{#each hackathons}}
                 <div class="box">
-
                     <h3>{{[Company.companyName]}}: {{title}} - Currently looking for {{maxStudent}} students</h3>
                     <p>{{description}}</p>
                     <p>Opening Date: {{prettifyDate startDate "DD-MM-YYYY"}}</p>
                     <p>Closing Date: {{prettifyDate endDate "DD-MM-YYYY"}}</p>
-
                     <div class="buttons">
-                        <button class="hackathonJoin button is-primary" data-id="{{this.id}}">
+                        <button class="hackathonJoin button " data-id="{{this.id}}">
                             Join Hackathon
                         </button>
                     </div>
                 </div>
-
                 {{/each}}
             </div>
             {{/unless}}
@@ -36,27 +33,42 @@
                     <p>Opening Date: {{prettifyDate dataValues.startDate "DD-MM-YYYY"}}</p>
                     <p>Closing Date: {{prettifyDate dataValues.endDate "DD-MM-YYYY"}}</p>
                     <div class="buttons">
-                        <button class="hackathonDelete button is-primary" data-id="{{dataValues.id}}">
+                        <button class="hackathonDelete button " data-id="{{dataValues.id}}">
                             Delete Hackathon
                         </button>
                     </div>
                 </div>
-
-
-
-                {{/each}}
-                <p class="title">Students attending your Hackathons</p>
-                {{#each usersAttendingHackathons}}
-                <p class="subtitle is-5">{{dataValues.title}}</p>
-                {{#each dataValues.Users}}
-                <ul>
-                    <li>{{dataValues.fullName}}</li>
-                </ul>
-                {{/each}}
-                {{/each}}
-                {{#each studentCount}}
-                {{dataValues}}
                 {{/each}}
             </div>
-            {{/if}}
+        </div>
+    </div>
+
+    <div class="media">
+        <figure class="media-left image is-64x64">
+            <img src="asset/students.svg">
+        </figure>
+        <div class="media-content">
+            <p class="title">Students attending our Hackathons</p>
+            
+            {{#each usersAttendingHackathons}}
+            <div class="box">
+            <p class="subtitle is-5">{{dataValues.title}}</p>
+            {{#each dataValues.Users}}
+            <ul>
+                <li>{{dataValues.fullName}}</li>
+            </ul>
+            
+            {{/each}}
+            </div>
+            {{/each}}
+            {{#each studentCount}}
+            {{dataValues}}
+            {{/each}}
+            
+            
+        </div>
+        {{/if}}
+    </div>
+
+
 </article>
