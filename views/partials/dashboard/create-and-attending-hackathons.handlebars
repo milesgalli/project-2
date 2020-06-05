@@ -1,4 +1,6 @@
-                <div class="tile is-parent">
+
+
+<div class="tile is-parent">
                     <article class="tile is-child notification create-hackathon">
                         {{#if user.role}}
                         <div class="media">
@@ -9,50 +11,69 @@
                                <p class="title">Create Hackathon</p>  
                             </div>
                         </div>
-
-                        <div class="field is-horizontal">
-                            <div class="field is-small">
-                            </div>
-                            <div class="field-body">
-                                <div class="field">
-                                    <p class="control">
-                                        <input id="inputHackathonTitle" class="input" type="text" placeholder="Title">
-                                    </p>
-                                </div>
-                                <div class="field">
-                                    <p class="control has-icons-right">
-                                        <input id="inputNoHackathonStudents" class="input" type="number"
-                                            placeholder="Number of students">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="field is-horizontal">
-                            <div class="field-body">
-                                <div class="field">
-                                    <p class="control">
-                                        <label>Start Date</label>
-                                        <input id="inputHackathonStartDate" class="input" type="date"
-                                            placeholder="Start Date" min="2020-06-01" </p>
-                                </div>
-                                <div class="field">
-                                    <p class="control">
-                                        <label>End Date</label>
-                                        <input id="inputHackathonEndDate" class="input" type="date"
-                                            placeholder="Finish Date" min="2020-06-01">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <p class="control">
-                                <textarea id="inputHackathonDiscription" class="textarea"
-                                    placeholder="Description"></textarea>
-                            </p>
-                        </div>
-                        <div id="hackathonSubmit" class="buttons"><button class="button " href="/">Create
-                                Hackathon</button></div>
-                        {{/if}}
-
-                    </article>
+        
+        <div class="field is-horizontal">
+            <div class="field is-small">
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        <label>Title</label>
+                        <input id="inputHackathonTitle" class="input" type="text" placeholder="What is the task?">
+                    </p>
                 </div>
+                <div class="field">
+                    <p class="control has-icons-right">
+                        <label>Number of students</label>
+                        <input id="inputNoHackathonStudents" required="required" class="input" type="number" value="0">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        <label>Start Date</label>
+                        <input id="inputHackathonStartDate" class="input" type="date" placeholder="Start Date"
+                            min="2020-06-01" value="2020-06-06"></p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <label>End Date</label>
+                        <input id="inputHackathonEndDate" class="input" type="date" placeholder="Finish Date"
+                            min="2020-06-01" value="2020-06-30"></p>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <p class="control">
+                <label>Description</label>
+                <textarea id="inputHackathonDiscription" class="textarea" placeholder="Add all details for your Hackathon"></textarea>
+            </p>
+        </div>
+        <div id="hackathonSubmit" class="buttons"><button class="button is-primary" href="/">Create
+                Hackathon</button></div>
+        {{/if}}
+        <div class="tile is-parent">
+    <article class="tile is-child notification is-info">
+
+        {{#unless user.role}}
+        <p class="title">Hackathon's I've signed up to</p>
+        {{#each attending}}
+        <div class="box">
+            <h3>{{dataValues.title}} - Currently looking for {{dataValues.maxStudent}} students</h3>
+            <p>{{dataValues.description}}</p>
+            <p>Closing Date: {{prettifyDate dataValues.endDate "DD-MM-YYYY"}}</p>
+            <div class="buttons">
+                <button class="hackathonUnjoin button is-primary" data-id="{{dataValues.id}}">
+                    Unjoin Hackathon
+                </button>
+            </div>
+        </div>
+        {{/each}}
+        {{/unless}}
+
+    </article>
+</div>
