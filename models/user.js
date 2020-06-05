@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
 
   User.associate = function(models) {
     User.belongsTo(models.Company, {
-      foreignKey: "CompanyId",
+      foreignKey: { name: "CompanyId", allowNull: false },
     });
     User.belongsToMany(models.Hackathon, { through: "HackathonUser" });
   };

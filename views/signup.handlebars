@@ -1,3 +1,5 @@
+<link href="/stylesheets/style.css" rel="stylesheet">
+
 <form class="signup">
     <div class="steps" id="stepsDemo">
         <div class="step-item is-active is-success">
@@ -37,11 +39,10 @@
                             <div class="field">
                                 <div class="control">
                                     <label class="radio">
-                                        <input type="radio" name="role-answer" value="0" checked="checked"
-                                            id="studentInput">Student
+                                        <input type="radio" name="roleAnswer" value="0" id="studentInput" />Student
                                     </label>
                                     <label class="radio">
-                                        <input type="radio" name="role-answer" value="1" id="companyInput">Company
+                                        <input type="radio" name="roleAnswer" value="1" id="companyInput" />Company
                                     </label>
                                 </div>
                             </div>
@@ -61,19 +62,21 @@
                         <div class="field">
                             <label for="exampleInputEmail1">Email address</label>
                             <div class="control">
-                                <input type="email" class="input" id="email-input" placeholder="Email">
+                                <input type="email" class="input" id="email-input" placeholder="Email" name="email" />
                             </div>
                         </div>
                         <div class="field">
                             <label for="exampleInputPassword1">Password</label>
                             <div class="control">
-                                <input type="password" class="input" id="password-input" placeholder="Password">
+                                <input type="password" class="input" id="password-input" placeholder="Password"
+                                    name="password" />
                             </div>
                         </div>
                         <div class="field">
                             <label for="exampleInputlocated">Location</label>
                             <div class="control">
-                                <input type="text" class="input" id="location-input" placeholder="Location">
+                                <input type="text" class="input" id="location-input" placeholder="Location"
+                                    name="location" />
                             </div>
                         </div>
                     </div>
@@ -90,70 +93,69 @@
                 <div class="columns">
                     <div class="column is-4"></div>
 
-                    <div class="column is-4">
+                    <div class="column is-4 appendRoleSelect">
                         <!--student questions-->
-                        <div class="student-questions">
+                        <div class="student-questions hidden">
                             <div class="field">
                                 <label for="exampleInputFullName">Full Name</label>
                                 <div class="control">
-                                    <input type="text" class="input" id="fullName-input">
+                                    <input type="text" class="input" id="fullName-input" />
                                 </div>
                             </div>
                             <div class="field">
                                 <label for="exampleInputCourse">What course did you gaduate from?</label>
                                 <div class="control">
-                                    <input type="text" class="input" id="course-input">
+                                    <input type="text" class="input" id="course-input" />
                                 </div>
                             </div>
                             <div class="field">
                                 <label for="exampleInputTechnologies">What technology feilds are you experienced
                                     in?</label>
                                 <div class="control">
-                                    <input type="text" class="input" id="technology-input">
+                                    <input type="text" class="input" id="technology-input" />
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
                                     <label class="radio" for="exampleInputEmployment">Were you looking for employment?
-                                        <input type="radio" name="employmentanswer" value="yes">Yes
+                                        <input type="radio" name="employmentanswer" value="yes" />Yes
                                     </label>
                                     <label class="radio">
-                                        <input type="radio" name="employmentanswer" value="no">No
+                                        <input type="radio" name="employmentanswer" value="no" />No
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <!--company questions-->
-                        <div class="company-questions">
+                        <div class="company-questions hidden">
                             <div class="field">
                                 <label for="exampleInputCompanyName">Company Name</label>
                                 <div class="control">
-                                    <input type="text" class="input" id="companyName-input">
+                                    <input type="text" class="input" id="companyName-input" />
                                 </div>
                             </div>
                             <div class="field">
                                 <label for="exampleInputIndustry">What industry is your company in?</label>
                                 <div class="control">
-                                    <input type="text" class="input" id="industry-input">
+                                    <input type="text" class="input" id="industry-input" />
                                 </div>
                             </div>
                             <div class="field">
                                 <label for="exampleInputMaxEmployees">How many employees do you have?</label>
                                 <div class="control">
-                                    <input type="number" class="input" id="maxEmployees-input">
+                                    <input type="number" class="input" id="maxEmployees-input" />
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
+            </div>
 
 
-                <!-- step 4 -->
-                <div class="step-content has-text-centered">
-                    <h1 class="title is-4">Your account is now created!</h1>
-                </div>
-
+            <!-- step 4 -->
+            <div class="step-content has-text-centered" id="appendValidateResult">
+                <h1 class="title is-4">Your account is now created!</h1>
             </div>
 
             <!-- previous, next & signup btns-->
@@ -162,7 +164,8 @@
                     <a href="#" data-nav="previous" id="previous" class="button is-light">Previous</a>
                 </div>
                 <div class="steps-action">
-                    <a href="#" data-nav="next" id="next" class="button is-light">Next</a>
+                    <a href="#" id="next" class="button is-light">Next</a>
+                    <a href="#" data-nav="next" id="next-hidden" class="button is-light hidden">Next</a>
                     <button id="submit-btn" style="display: none;" type="submit" class="button is-light">Sign
                         Up</button>
                 </div>
