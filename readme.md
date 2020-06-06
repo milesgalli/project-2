@@ -1,7 +1,7 @@
 # Project 2 
 
 ## Link to Heroku 
-https://dashboard.heroku.com/apps/perthproject2
+https://git.heroku.com/pacific-bayou-03953.git
 
 ## Github Repo Link 
 https://github.com/milesgalli/project-2.git
@@ -11,7 +11,7 @@ https://github.com/milesgalli/project-2
 
 # Overview 
 
-A platfrom that connects graduates with businesses. On the platform companies post software related issues specific to their business, students can view these problems and develop solutions to sovle them. The idea being that users can collaborate with other students on the platfrom. The benefit to students being that they get the chance to develop new skills, solve real world problems, network and have additional projects to add to their porfolio or resume. 
+A platfrom that connects graduates with businesses. On the platform companies post software related issues specific to there business, students can view these problems and develop solutions to sovle them. The idea being that users can collaborate with other students on the platfrom. The benefit to students being that they get the chance to develop new skills, solve real world problems, network and have additional projects to add to their porfolio or resume. 
 
 Companies can benefit by getting custom made software solutions for there business. Additionally getting access to top talent coming out of bootcamps and university programs. 
 
