@@ -1,6 +1,9 @@
 <div class="tile is-4 is-parent is-vertical">
-    <article class="tile is-child notification is-primary">
+    <article class="tile is-child notification ">
         {{#unless user.role}}
+        <figure class="image is-128x128">
+            <img src="asset/stu-info1.svg">
+        </figure>
         <p class="title">Student Information</p>
         <p>Name: {{user.fullName}}</p>
         <p>Email: {{user.email}}</p>
@@ -11,6 +14,9 @@
         {{/unless}}
 
         {{#if user.role}}
+        <figure class="image is-128x128">
+            <img src="asset/company-info.svg">
+        </figure>
         <p class="title">Company Information</p>
         <p>Company Name: {{user.Company.dataValues.companyName}}</p>
         <p>Industry: {{user.Company.dataValues.industry}}</p>

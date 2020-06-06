@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 // Requiring passport as we've configured it
 const passport = require("./config/passport");
+const moment = require("moment");
 
 // Setting up port and requiring models for syncing
 const PORT = process.env.PORT || 8080;
@@ -23,18 +24,16 @@ app.use(passport.session());
 // Set Handlebars.
 const exphbs = require("express-handlebars");
 
-app.engine(
-  "handlebars",
-  exphbs({
-    // helpers: {
-    //   prettifyDate: function (date) {
-    //     console.log(new Date(date).toString("yyyy-MM-dd"));
-    //     return new Date(date).toString("yyyy-MM-dd");
-    //   },
-    // },
-    defaultLayout: "main",
-  })
-);
+const hbs = exphbs.create({
+  helpers: {
+    prettifyDate: function (date, format) {
+      var mmnt = moment(date);
+      return mmnt.format(format);
+    },
+  },
+});
+
+app.engine("handlebars",  hbs.engine);
 app.set("view engine", "handlebars");
 
 // Requiring our routes

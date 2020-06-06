@@ -9,10 +9,11 @@ $(document).ready(function() {
     event.preventDefault();
     var userData = {
       email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInput.val().trim(),
     };
 
     if (!userData.email || !userData.password) {
+      Swal.fire("", "You need to enter an Email and Password", "warning");
       return;
     }
 
@@ -26,13 +27,16 @@ $(document).ready(function() {
   function loginUser(email, password) {
     $.post("/api/login", {
       email: email,
-      password: password
+      password: password,
     })
       .then(function() {
         window.location.replace("/dashboard");
         // If there's an error, log the error
       })
-      .catch(function(err) {
+      .catch(function(response) {
+        if (response.status === 401) {
+          Swal.fire("", "Incorrect Email and/or Password", "warning");
+        }
         console.log(err);
       });
   }

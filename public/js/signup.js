@@ -42,7 +42,7 @@ $(document).ready(function() {
       return;
     }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData)
+    signUpUser(userData);
     emailInput.val("");
     passwordInput.val("");
   });
@@ -51,42 +51,48 @@ $(document).ready(function() {
   // Otherwise we log any errors
   function signUpUser(userData) {
     // console.log(userData);
-    
+
     $.post("/api/user/signup", userData)
-      .then(function(data) {  
+      .then(function(data) {
         window.location.replace("/dashboard");
-      // If there's an error, handle it by throwing up a bootstrap alert
+        // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
   }
 
-  function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
+  function handleLoginErr(response) {
+    if (response.status === 422) {
+      Swal.fire(
+        "Uh oh!",
+        "Unable to process contained instructions",
+        "warning"
+      );
+    } else if (response.status === 401) {
+      window.location.replace("/");
+    }
   }
 
   let states = {
-    counter: 0
+    counter: 0,
   };
 
   function nextStep() {
     states.counter++;
-    document.getElementById('next-hidden').click();
+    document.getElementById("next-hidden").click();
   }
 
   //when next is clicked add 1 to state
   //when previous is clicked -1 to state
   $("#next").click(function(event) {
-
     event.preventDefault();
 
     let isStudent = $("#studentInput").prop("checked");
     let isCompany = $("#companyInput").prop("checked");
 
-    let userHasNotSelectedAnOption = (isStudent === false && isCompany === false);
+    let userHasNotSelectedAnOption = isStudent === false && isCompany === false;
 
-    if(states.counter === 0 && userHasNotSelectedAnOption){
-      alert("choose something");
+    if (states.counter === 0 && userHasNotSelectedAnOption) {
+      swal("Please choose a role before continuing");
       return;
     }
 
@@ -94,25 +100,25 @@ $(document).ready(function() {
     let emptyPasswordInput = $("input#password-input").val() === "";
     let emptyLocationInput = $("input#location-input").val() === "";
 
-    emptyProfileQuestions = (emptyEmailInput || emptyPasswordInput || emptyLocationInput);
+    emptyProfileQuestions =
+      emptyEmailInput || emptyPasswordInput || emptyLocationInput;
 
     if (states.counter === 1 && emptyProfileQuestions) {
-      alert("cant have empty fields");
+      swal("Please fill in all the fields");
       return;
     }
 
-      // we are currently in social page
     renderUserTypeOnSignup();
-
 
     let emptyStudentNameInput = $("input#fullName-input").val() === "";
     let emptyCourseInput = $("input#course-input").val() === "";
     let emptyTechnologyInput = $("input#technology-input").val() === "";
 
-    emptyStudentQuestions = (emptyStudentNameInput || emptyCourseInput || emptyTechnologyInput);
+    emptyStudentQuestions =
+      emptyStudentNameInput || emptyCourseInput || emptyTechnologyInput;
 
     if (states.counter === 2 && isStudent && emptyStudentQuestions) {
-      alert("cant be empty");
+      swal("Please fill in all the fields");
       return;
     }
 
@@ -120,10 +126,11 @@ $(document).ready(function() {
     let emptyIndustryInput = $("input#industry-input").val() === "";
     let emptyMaxEmployeesInput = $("input#maxEmployees-input").val() === "";
 
-    let emptyCompanyQuestions = (emptyCompanyNameInput || emptyIndustryInput || emptyMaxEmployeesInput);
+    let emptyCompanyQuestions =
+      emptyCompanyNameInput || emptyIndustryInput || emptyMaxEmployeesInput;
 
     if (states.counter === 2 && isCompany && emptyCompanyQuestions) {
-      alert("cant be empty");
+      swal("Please fill in all the fields");
       return;
     }
 
@@ -159,26 +166,4 @@ $(document).ready(function() {
       $(".student-questions").addClass("hidden");
     }
   }
-
-  
-  function appendError() {
-
-    $("#appendValidateResult").empty();
-
-    let errorHtml = $("<h1>").html("Please fill make sure all fields are filled");
-
-    $("#appendValidateResult").append(errorHtml);
-
-  }
-
-  function appendSuccess() {
-
-    $("#appendValidateResult").empty();
-
-    let successHtml = $("<h1>").html("Your account has been created! Click the Sign Up button");
-
-    $("#appendValidateResult").append(successHtml);
-  }
 });
-
-

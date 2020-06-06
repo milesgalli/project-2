@@ -18,13 +18,12 @@ $("#hackathonSubmit").click(function() {
     startDate: startDateInput.val() ? startDateInput.val().trim() : null,
     endDate: endDateInput.val() ? endDateInput.val().trim() : null,
   };
-  console.log(hackathonData);
-  console.log(JSON.stringify(hackathonData));
+  // console.log(hackathonData);
+  // console.log(JSON.stringify(hackathonData));
   createHackathon(hackathonData);
 });
 
 function createHackathon(hackathonData) {
-
   $.ajax({
     url: "/api/hackathons",
     method: "post",
@@ -33,28 +32,32 @@ function createHackathon(hackathonData) {
     .then(function() {
       location.reload();
     })
-    .catch(handleHackathonErr);
-
-}
-
-function handleHackathonErr(err) {
-  $("#alert .msg").text(err.responseJSON);
-  $("#alert").fadeIn(500);
+    .catch(err);
+    console.log(err);
+    location.reload();
 }
 
 $(".hackathonDelete").on("click", function(event) {
   var id = $(this).data("id");
-  if (confirm("Are you sure you want to delete this Hackathon?")) {
-    // Send the DELETE request.
-    $.ajax("/api/hackathons/" + id, {
-      type: "DELETE",
-    }).then(function() {
-      console.log("deleted hackathon ", id);
-      // Reload the page to get the updated list
-      location.reload();
-    });
-  }
-});
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this Hackathon!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then(function(result) {
+    if (result === true) {
+      $.ajax("/api/hackathons/" + id, {
+        type: "DELETE",
+        success: function () {
+        location.reload();
+        }
+      })
+    } if (result === null) {
+        swal("Your Hackathon is safe!");      
+      }
+  })
+})
 
 $(".hackathonJoin").on("click", function(event) {
   var id = $(this).data("id");
@@ -68,7 +71,11 @@ $(".hackathonJoin").on("click", function(event) {
       location.reload();
     })
     .catch(function(err) {
-      alert("You have already joined that hackathon");
+      Swal.fire(
+        "Unable to Join",
+        "You are already attending that hackathon",
+        "warning"
+      );
     });
 });
 
@@ -90,7 +97,16 @@ $(".hackathonUnjoin").on("click", function(event) {
 
 // function so that only certain values can be input
 function setInputFilter(textbox, inputFilter) {
-  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+  [
+    "input",
+    "keydown",
+    "keyup",
+    "mousedown",
+    "mouseup",
+    "select",
+    "contextmenu",
+    "drop",
+  ].forEach(function(event) {
     textbox.addEventListener(event, function() {
       if (inputFilter(this.value)) {
         this.oldValue = this.value;
@@ -106,6 +122,8 @@ function setInputFilter(textbox, inputFilter) {
   });
 }
 // makes sure only numbers are input
-setInputFilter(document.getElementById("#inputNoHackathonStudents"), function(value) {
+setInputFilter(document.getElementById("#inputNoHackathonStudents"), function(
+  value
+) {
   return /^[0-9]/.test(value); // Allow digits, using a RegExp
 });

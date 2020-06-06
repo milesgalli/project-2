@@ -5,3 +5,47 @@ form.login {
 .hidden {
   display: none;
 }
+
+.user-info{
+  background-color: #fdfdfd;
+  font-family: 'Muli', sans-serif;
+  border-radius: 4px;
+  border: 1px solid #efefef;
+}
+
+.button{
+  background-color: #6bd5e1;
+  color:white;
+  font-weight: bold;
+}
+
+.create-hackathon, 
+.hackathon-signed{
+  background-color: #FFD37A;
+  font-family: 'Muli', sans-serif;
+  border-radius: 4px;
+  border: 1px solid #efefef;
+ 
+}
+
+.hackathons{
+  color: white;
+  background-color: #f59e9b;
+  font-family: 'Muli', sans-serif;
+  border-radius: 4px;
+  border: 1px solid #efefef;
+}
+
+.navbar{
+  margin-left: 3%;
+}
+
+.navbar-end{
+  margin-right: 5%;
+  margin-top: 10px;
+}
+
+.login{
+  margin-top: 20px;
+  font-family: 'Muli', sans-serif;
+}
