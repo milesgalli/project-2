@@ -50,9 +50,6 @@ $(".hackathonDelete").on("click", function(event) {
       $.ajax("/api/hackathons/" + id, {
         type: "DELETE",
         success: function () {
-          swal("Your Hackathon has been deleted!", {
-            icon: "success",
-        }),
         location.reload();
         }
       })
