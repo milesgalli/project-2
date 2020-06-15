@@ -2,7 +2,7 @@
     <article class="tile is-child notification ">
         {{#unless user.role}}
         <figure class="image is-128x128">
-            <img src="asset/stu-info1.svg">
+            <img src="asset/stu-info1.svg" alt="user-info">
         </figure>
         <p class="title">Student Information</p>
         <p>Name: {{user.fullName}}</p>
@@ -15,7 +15,7 @@
 
         {{#if user.role}}
         <figure class="image is-128x128">
-            <img src="asset/company-info.svg">
+            <img src="asset/company-info.svg" alt="company-info">
         </figure>
         <p class="title">Company Information</p>
         <p>Company Name: {{user.Company.dataValues.companyName}}</p>

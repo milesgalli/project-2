@@ -107,7 +107,7 @@ function setInputFilter(textbox, inputFilter) {
     "contextmenu",
     "drop",
   ].forEach(function(event) {
-    textbox.addEventListener(event, function() {
+    addEventListener(event, function() {
       if (inputFilter(this.value)) {
         this.oldValue = this.value;
         this.oldSelectionStart = this.selectionStart;
